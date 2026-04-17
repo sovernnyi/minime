@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MiniMe Boutique</title>
+
+  <!-- fonts mwehehw -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Tenor+Sans&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- css -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- banner -->
+  <div class="top-banner" role="banner">
+    Free shipping on family sets and on Payment first orders!
+  </div>
+
+  <!-- navigation -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <!-- logo / home button (eto yung ginamit ni cloue na logo pa) -->
+    <a href="#" class="nav-logo" data-page="home" aria-label="MiniMe Boutique Home">
+      Mini<span>Me</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+
+      <!-- home button - pinakataas na page -->
+      <li><a href="#" data-page="home" data-scroll-top="true" aria-label="Home">Home</a></li>
+
+      <!-- shop the collection and shop sets sa store? part ng page (parehas) -->
+      <li><a href="#" data-page="home" data-scroll-to="shop" aria-label="Shop Sets">Shop Sets</a></li>
+      <li><a href="#" data-page="about"   aria-label="About Us">About</a></li>
+      <li><a href="#" data-page="contact" aria-label="Contact Us">Contact</a></li>
+
+    </ul>
+
+    <div class="nav-actions">
+      <!-- cart icon -->
+      <button class="nav-icon-btn" aria-label="View cart" data-page="cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span class="cart-badge" aria-live="polite">0</span>
+      </button>
+
+      <!-- burger icon para sa mobile (not sure if working!) -->
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HOME PAGE -->
+  <main id="page-home" class="page">
+
+    <!-- hero section -->
+    <section id="newin" class="hero" aria-labelledby="hero-heading">
+      <div class="hero-card">
+        <span class="hero-eyebrow">Family Clothing Store</span>
+        <h1 id="hero-heading" class="hero-title font-serif">MiniMe Boutique</h1>
+        <p class="hero-subtitle font-serif">
+          Matching moments made aesthetic. Our signature embroidery collection is designed for the modern family who values tradition and luxury comfort.
+        </p>
+        <a href="#" class="hero-cta" data-page="home" data-scroll-to="shop" aria-label="Shop the collection">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+          Shop the Collection
+        </a>
+      </div>
+    </section>
+
+    <!-- PRODUCT SECTION -->
+    <section id="shop" class="products-section" aria-labelledby="shop-heading">
+      <div class="section-header">
+        <span class="section-eyebrow">Curated Family Sets</span>
+        <h2 id="shop-heading" class="section-title font-serif">Shop the Collection</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="products-grid" role="list">
+
+        <!-- 1. SANDRA -->
+        <article class="product-card" role="listitem" data-product="sandra"
+                 tabindex="0" aria-label="Sandra Family Set — click to view details">
+          <div class="product-img-wrap">
+            <span class="product-badge badge-gold">SANDRA</span>
+  
+            <img src="images/sandra.png"
+                 alt="Sandra Family Set — floral pink matching outfits"/>
+          </div>
+          <div class="product-info">
+            <div class="product-name-row">
+              <h3 class="product-name font-serif">Sandra Family Set</h3>
+              <span class="product-price font-serif">₱825</span>
+            </div>
+            <p class="product-material">Floral Design • Pink</p>
+            <div class="product-divider"></div>
+            <div class="product-breakdown">
+              <span>Mom &amp; Daughter: ₱825</span>
+              <span>Dad: ₱345</span>
+              <span>Son: ₱245</span>
+            </div>
+            <button class="product-add-btn" aria-label="Add Ellery Family Set to cart"
+                    onclick="event.stopPropagation(); addToCart(PRODUCTS['sandra'])">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Add to Cart
+            </button>
+          </div>
+        </article>
+
+        <!-- 2. Krizzel -->
+        <article class="product-card" role="listitem" data-product="krizzel"
+                 tabindex="0" aria-label="Krizzel Family Set — click to view details">
+          <div class="product-img-wrap">
+            <span class="product-badge badge-pink">KRIZZEL</span>
+            <img src="images/krizzel.png"
+                 alt="Krizzel Family Set — white cotton linen matching outfits" />
+          </div>
+          <div class="product-info">
+            <div class="product-name-row">
+              <h3 class="product-name font-serif">Krizzel Family Set</h3>
+              <span class="product-price font-serif">₱1,160</span>
+            </div>
+            <p class="product-material">Cotton Linen • White</p>
+            <div class="product-divider"></div>
+            <div class="product-breakdown">
+              <span>Twin Set: ₱815</span>
+              <span>Dad: ₱345</span>
+              <span>Son: ₱245</span>
+            </div>
+            <button class="product-add-btn" aria-label="Add Krizzel Family Set to cart"
+                    onclick="event.stopPropagation(); addToCart(PRODUCTS['krizzel'])">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Add to Cart
+            </button>
+          </div>
+        </article>
+
+        <!-- 3. Mia -->
+        <article class="product-card" role="listitem" data-product="mia"
+                 tabindex="0" aria-label="Mia Family Set — click to view details">
+          <div class="product-img-wrap">
+            <span class="product-badge badge-brown">MIA</span>
+            <img src="images/mia.png"
+                 alt="Mia Family Set — soft khaki embroidery matching outfits" />
+          </div>
+          <div class="product-info">
+            <div class="product-name-row">
+              <h3 class="product-name font-serif">Mia Family Set</h3>
+              <span class="product-price font-serif">₱1,140</span>
+            </div>
+            <p class="product-material">Flower Embroidery • Black</p>
+            <div class="product-divider"></div>
+            <div class="product-breakdown">
+              <span>Mom &amp; Daughter: ₱795</span>
+              <span>Dad: ₱345</span>
+              <span>Son: ₱245</span>
+            </div>
+            <button class="product-add-btn" aria-label="Add Mia Family Set to cart"
+                    onclick="event.stopPropagation(); addToCart(PRODUCTS['mia'])">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Add to Cart
+            </button>
+          </div>
+        </article>
+
+        <!-- 4. Eula -->
+        <article class="product-card" role="listitem" data-product="eula"
+                 tabindex="0" aria-label="Eula Family Set — click to view details">
+          <div class="product-img-wrap">
+            <span class="product-badge badge-gold">EULA</span>
+            <img src="images/eula.png"
+                 alt="Eula Family Set — baby blue linen matching outfits">
+          </div> 
+          <div class="product-info">
+            <div class="product-name-row">
+              <h3 class="product-name font-serif">Eula Family Set</h3>
+              <span class="product-price font-serif">₱1,160</span>
+            </div>
+            <p class="product-material">Linen • Baby blue</p>
+            <div class="product-divider"></div>
+            <div class="product-breakdown">
+              <span>Mom &amp; Daughter: ₱815</span>
+              <span>Dad: ₱345</span>
+              <span>Son: ₱245</span>
+            </div>
+            <button class="product-add-btn" aria-label="Add Eula Family Set to cart"
+                    onclick="event.stopPropagation(); addToCart(PRODUCTS['eula'])">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Add to Cart
+            </button>
+          </div>
+        </article>
+
+        <!-- 5. Olivia -->
+        <article class="product-card" role="listitem" data-product="olivia"
+                 tabindex="0" aria-label="Olivia Family Set — click to view details">
+          <div class="product-img-wrap">
+            <span class="product-badge badge-pink">OLIVIA</span>
+            <img src="images/olivia.png"
+                 alt="Olivia Family Set — sage green cotton matching outfits" />
+          </div>
+          <div class="product-info">
+            <div class="product-name-row">
+              <h3 class="product-name font-serif">Olivia Family Set</h3>
+              <span class="product-price font-serif">₱1,160</span>
+            </div>
+            <p class="product-material">Cotton Floral • Peach</p>
+            <div class="product-divider"></div>
+            <div class="product-breakdown">
+              <span>Mom &amp; Daughter: ₱815</span>
+              <span>Dad: ₱345</span>
+              <span>Son: ₱245</span>
+            </div>
+            <button class="product-add-btn" aria-label="Add Olivia Family Set to cart"
+                    onclick="event.stopPropagation(); addToCart(PRODUCTS['olivia'])">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Add to Cart
+            </button>
+          </div>
+        </article>
+
+        <!-- 6. Ellery -->
+        <article class="product-card" role="listitem" data-product="ellery"
+                 tabindex="0" aria-label="Ellery Family Set — click to view details">
+          <div class="product-img-wrap">
+            <span class="product-badge badge-brown">ELLERY</span>
+            <img src="images/ellery.png"
+                 alt="Ellery Family Set — dusty blue linen matching outfits"/>
+          </div>
+          <div class="product-info">
+            <div class="product-name-row">
+              <h3 class="product-name font-serif">Ellery Family Set</h3>
+              <span class="product-price font-serif">₱1,180</span>
+            </div>
+            <p class="product-material">Linen • Pastel Yellow</p>
+            <div class="product-divider"></div>
+            <div class="product-breakdown">
+              <span>Mom &amp; Daughter: ₱835</span>
+              <span>Dad: ₱345</span>
+              <span>Son: ₱245</span>
+            </div>
+            <button class="product-add-btn" aria-label="Add Ellery Family Set to cart"
+                    onclick="event.stopPropagation(); addToCart(PRODUCTS['ellery'])">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Add to Cart
+            </button>
+          </div>
+        </article>
+
+        <!-- 7. Paula -->
+        <article class="product-card" role="listitem" data-product="paula"
+                 tabindex="0" aria-label="Paula Family Set — click to view details">
+          <div class="product-img-wrap">
+            <span class="product-badge badge-gold">PAULA</span>
+            <img src="images/paula.png"
+                 alt="Paula Family Set — ivory embroidery matching outfits"/>
+          </div>
+          <div class="product-info">
+            <div class="product-name-row">
+              <h3 class="product-name font-serif">Puala Family Set</h3>
+              <span class="product-price font-serif">₱1,130</span>
+            </div>
+            <p class="product-material">Cotton • Dusty Pink</p>
+            <div class="product-divider"></div>
+            <div class="product-breakdown">
+              <span>Mom &amp; Daughter: ₱785</span>
+              <span>Dad: ₱345</span>
+              <span>Son: ₱245</span>
+            </div>
+            <button class="product-add-btn" aria-label="Add Paula Family Set to cart"
+                    onclick="event.stopPropagation(); addToCart(PRODUCTS['paula'])">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Add to Cart
+            </button>
+          </div>
+        </article>
+
+        <!-- 8. Pinky -->
+        <article class="product-card" role="listitem" data-product="pinky"
+                 tabindex="0" aria-label="Pinky Coords Family Set — click to view details">
+          <div class="product-img-wrap">
+            <span class="product-badge badge-pink">PINKY COORDS</span>
+            <img src="images/pinky.png"
+                 alt="Iris Family Set — purple linen matching outfits"/>
+          </div>
+          <div class="product-info">
+            <div class="product-name-row">
+              <h3 class="product-name font-serif">Pinky Coords Family Set</h3>
+              <span class="product-price font-serif">₱725</span>
+            </div>
+            <p class="product-material">Linen • Purple</p>
+            <div class="product-divider"></div>
+            <div class="product-breakdown">
+              <span>Mom &amp; Daughter: ₱725</span>
+              <span>Dad: ₱345</span>
+              <span>Son: ₱245</span>
+            </div>
+            <button class="product-add-btn" aria-label="Add Pinky Coords Family Set to cart"
+                    onclick="event.stopPropagation(); addToCart(PRODUCTS['pinky'])">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Add to Cart
+            </button>
+          </div>
+        </article>
+
+        <!-- 9. Ailah -->
+        <article class="product-card" role="listitem" data-product="ailah"
+                 tabindex="0" aria-label="Ailah Family Set — click to view details">
+          <div class="product-img-wrap">
+            <span class="product-badge badge-brown">AILAH</span>
+            <img src="images/ailah.png"
+                 alt="Ailah Family Set — green cotton matching outfits"/>
+          </div>
+          <div class="product-info">
+            <div class="product-name-row">
+              <h3 class="product-name font-serif">Ailah Family Set</h3>
+              <span class="product-price font-serif">₱785</span>
+            </div>
+            <p class="product-material">Cotton • Green</p>
+            <div class="product-divider"></div>
+            <div class="product-breakdown">
+              <span>Mom &amp; Daughter: ₱785</span>
+              <span>Dad: ₱345</span>
+              <span>Son: ₱245</span>
+            </div>
+            <button class="product-add-btn" aria-label="Add Ailah Family Set to cart"
+                    onclick="event.stopPropagation(); addToCart(PRODUCTS['ailah'])">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Add to Cart
+            </button>
+          </div>
+        </article>
+
+        <!-- 10. Althea -->
+        <article class="product-card" role="listitem" data-product="althea"
+                 tabindex="0" aria-label="Althea Family Set — click to view details">
+          <div class="product-img-wrap">
+            <span class="product-badge badge-gold">ALTHEA</span>
+            <img src="images/althea.png"
+                 alt="Althea Family Set — pink cotton matching outfits">
+          </div>
+          <div class="product-info">
+            <div class="product-name-row">
+              <h3 class="product-name font-serif">Althea Family Set</h3>
+              <span class="product-price font-serif">₱1,090</span>
+            </div>
+            <p class="product-material">Cotton • Pink</p>
+            <div class="product-divider"></div>
+            <div class="product-breakdown">
+              <span>Mom &amp; Daughter: ₱745</span>
+              <span>Dad: ₱345</span>
+              <span>Son: ₱245</span>
+            </div>
+            <button class="product-add-btn" aria-label="Add Althea Family Set to cart"
+                    onclick="event.stopPropagation(); addToCart(PRODUCTS['althea'])">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+              Add to Cart
+            </button>
+          </div>
+        </article>
+
+      </div><!-- /products-grid -->
+    </section>
+
+    <!-- atelierrrr -->
+    <section id="atelier" class="atelier-section" aria-labelledby="atelier-heading">
+      <div class="atelier-content">
+        <span class="atelier-eyebrow">Our Boutique Story</span>
+        <h2 id="atelier-heading" class="atelier-title font-serif">Crafting Moments<br/>with Care.</h2>
+        <p class="atelier-body font-serif">
+          MiniMe represents the intersection of style and connection. Every piece is an heirloom in the making — designed in the Philippines with love for families who cherish togetherness.
+        </p>
+        <a href="#" class="hero-cta" data-page="about" aria-label="Read our story">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+          Read Our Story
+        </a>
+        <div class="atelier-stats">
+          <div class="atelier-stat">
+            <h5 class="font-serif">Pure</h5>
+            <p>Natural Fibers</p>
+          </div>
+          <div class="atelier-stat">
+            <h5 class="font-serif">Family</h5>
+            <p>Heirloom Quality</p>
+          </div>
+          <div class="atelier-stat">
+            <h5 class="font-serif">PH Made</h5>
+            <p>Local Craftsmanship</p>
+          </div>
+        </div>
+      </div>
+      <div class="atelier-image">
+        <img src="images/atelier.jpg"
+             alt="MiniMe boutique — family wearing matching outfits"/>
+      </div>
+    </section>
+
+    <!-- happy fam galeries hehe -->
+    <section id="families" class="families-section" aria-labelledby="families-heading">
+      <div class="section-header">
+        <span class="section-eyebrow">Sharing the Joy of Matching</span>
+        <h2 id="families-heading" class="section-title font-serif">Happy Families</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="families-grid" role="list">
+        <div class="family-card" role="listitem">
+          <img src="images/fam1.png"
+               alt="Happy family wearing matching MiniMe outfits together"/>
+        </div>
+        <div class="family-card" role="listitem">
+          <img src="images/fam2.png"
+               alt="Family in coordinated MiniMe collection outfits" />
+        </div>
+        <div class="family-card" role="listitem">
+          <img src="images/fam3.png"
+               alt="Parents and children in matching MiniMe sets" />
+        </div>
+        <div class="family-card" role="listitem">
+          <img src="images/fam4.png"
+               alt="Smiling family modeling MiniMe boutique outfits"/>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /page-home -->
+
+  <!-- CHECKOUT/CART PAGE -->
+  <main id="page-cart" class="page hidden">
+    <div class="page-hero">
+      <h1 class="page-hero-title font-serif">Your Cart</h1>
+      <span class="page-hero-sub">Review &amp; Complete Your Order</span>
+    </div>
+
+    <div class="cart-section">
+      <div class="cart-items-col">
+        <div id="cart-empty-state">
+          <svg class="cart-empty-icon" xmlns="http://www.w3.org/2000/svg" width="64" height="64"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <h2 class="cart-empty-title font-serif">Your cart is empty</h2>
+          <p class="cart-empty-body">Add a family set to get started — matching moments await.</p>
+          <a href="#" class="btn-outline-pink" data-page="home" aria-label="Continue shopping">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
+            Continue Shopping
+          </a>
+        </div>
+        <div id="cart-items-container" aria-live="polite" aria-label="Cart items"></div>
+      </div>
+
+      <aside id="order-summary-col" class="hidden" aria-label="Order summary">
+        <div class="order-summary">
+          <h2 class="summary-title font-serif">Order Summary</h2>
+          <div class="promo-input-wrap" role="search" aria-label="Apply promo code">
+            <input type="text" id="promo-input" class="promo-input"
+                   placeholder="Promo Code" aria-label="Enter promo code" />
+            <button class="promo-apply-btn" onclick="applyPromo()" aria-label="Apply promo code">Apply</button>
+          </div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="summary-subtotal">₱0</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span id="summary-shipping">₱150</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span id="summary-total" class="summary-total-amount font-serif">₱0</span>
+          </div>
+          <button id="checkout-btn" class="checkout-btn" onclick="openCheckoutModal()"
+                  aria-label="Proceed to checkout">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            Proceed to Checkout
+          </button>
+          <p class="secure-note">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Secure &amp; Encrypted Checkout
+          </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ===================== ABOUT PAGE ===================== -->
+  <main id="page-about" class="page hidden">
+    <div class="page-hero">
+      <h1 class="page-hero-title font-serif">Our Story</h1>
+      <span class="page-hero-sub">Crafted with Love in the Philippines</span>
+    </div>
+    <section class="about-section" aria-labelledby="about-heading">
+      <div class="about-content">
+        <div class="section-header" style="text-align:left; margin-bottom: 0">
+          <span class="section-eyebrow">Cheska &amp; Gab</span>
+          <h2 id="about-heading" class="section-title font-serif">More than clothing.<br/>It's a memory.</h2>
+          <div class="section-divider" style="margin-left: 0;"></div>
+        </div>
+        <p class="about-body font-serif">
+          MiniMe was born from a mother's desire to dress her family in something beautiful that lasted longer than a single photo. Cheska and Gab started this boutique in the Philippines with a single collection and a belief that matching outfits should never compromise quality or comfort.
+        </p>
+        <p class="about-body font-serif" style="margin-top: -16px;">
+          Every set is made with natural fibers — breathable, gentle on skin, and designed to be worn for celebrations, weekends, and ordinary Tuesday mornings that turn into precious memories.
+        </p>
+        <div class="about-values" role="list">
+          <div class="value-card" role="listitem">
+            <div class="value-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <h3 class="value-title font-serif">Made with Love</h3>
+            <p class="value-text">Every stitch is done with care and intention for your family.</p>
+          </div>
+          <div class="value-card" role="listitem">
+            <div class="value-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 8v4l3 3"/>
+              </svg>
+            </div>
+            <h3 class="value-title font-serif">Heirloom Quality</h3>
+            <p class="value-text">Pieces designed to be kept, worn again, and passed on.</p>
+          </div>
+          <div class="value-card" role="listitem">
+            <div class="value-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <h3 class="value-title font-serif">Philippine Made</h3>
+            <p class="value-text">Supporting local artisans and craftsmanship from our home.</p>
+          </div>
+          <div class="value-card" role="listitem">
+            <div class="value-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3 class="value-title font-serif">Natural Fibers</h3>
+            <p class="value-text">Breathable, soft, and gentle for babies and toddlers.</p>
+          </div>
+        </div>
+      </div>
+      <div class="about-img-side">
+        <img src="https://www.patpat.com/cdn/shop/files/67bee3d913123.webp?v=1755141402"
+             alt="MiniMe boutique family story — mother and child in matching dresses"
+             onerror="this.src='https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=800'" />
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== CONTACT PAGE ===================== -->
+  <main id="page-contact" class="page hidden">
+    <div class="page-hero">
+      <h1 class="page-hero-title font-serif">Get in Touch</h1>
+      <span class="page-hero-sub">We'd Love to Hear From You</span>
+    </div>
+
+    <section class="contact-section" aria-labelledby="contact-heading">
+      <div class="contact-info-col">
+        <h2 id="contact-heading" class="contact-info-title font-serif">
+          Questions? We're here for you.
+        </h2>
+        <p class="contact-info-body font-serif">
+          Whether you need help choosing the right set, checking your order, or just want to share a photo of your family in MiniMe — reach out anytime!
+        </p>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-detail-label">Email</p>
+            <p class="contact-detail-value font-serif">deargabclothing@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6 6l.27-.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 17v-.08z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-detail-label">Contact Number</p>
+            <p class="contact-detail-value font-serif">+63 968 306 6564</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-detail-label">Instagram</p>
+            <p class="contact-detail-value font-serif">@minime_cg</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-detail-label">Location</p>
+            <p class="contact-detail-value font-serif">160 A. Luna St. Quisao, Pililla, Rizal</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact form — sends email via mailto -->
+      <div class="contact-form-col">
+        <form class="contact-form" id="contact-form" onsubmit="handleContact(event)"
+              aria-label="Contact form" novalidate>
+          <h3 class="form-title font-serif">Send a Message</h3>
+
+          <div class="form-group">
+            <label for="contact-name" class="form-label">Full Name</label>
+            <input type="text" id="contact-name" name="name" class="form-input"
+                   placeholder="Your name" required aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label for="contact-email" class="form-label">Email Address</label>
+            <input type="email" id="contact-email" name="email" class="form-input"
+                   placeholder="your@email.com" required aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label for="contact-subject" class="form-label">Subject</label>
+            <input type="text" id="contact-subject" name="subject" class="form-input"
+                   placeholder="Order enquiry, sizing help, etc." />
+          </div>
+          <div class="form-group">
+            <label for="contact-message" class="form-label">Message</label>
+            <textarea id="contact-message" name="message" class="form-textarea"
+                      placeholder="Tell us how we can help you…" required aria-required="true"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit-btn" aria-label="Send message">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Mini<span>Me</span></div>
+        <p class="footer-tagline">
+          Cheska &amp; Gab Collections.<br/>
+          Philippines Made.<br/>
+          © 2025 MiniMe Boutique
+        </p>
+      </div>
+      <nav class="footer-col" aria-label="Quick links">
+        <h5>Quick Links</h5>
+        <ul role="list">
+          <li><a href="#" data-page="home" data-scroll-top="true">Home</a></li>
+          <li><a href="#" data-page="home" data-scroll-to="shop">Shop All Sets</a></li>
+          <li><a href="#" data-page="about">Our Story</a></li>
+          <li><a href="#" data-page="contact">Contact Us</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h5>Information</h5>
+        <ul role="list">
+          <li><span>Nationwide Shipping</span></li>
+          <li><span>Free Ship over ₱2,500</span></li>
+          <li><span>Premium Natural Fibers</span></li>
+          <li><span>7-Day Returns Policy</span></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Newsletter</h5>
+        <p style="font-size:10px; color: rgba(255,249,245,0.5); margin-bottom:14px; line-height:1.7; letter-spacing:0.05em;">
+          New collections, family stories, and exclusive offers.
+        </p>
+        <form onsubmit="handleNewsletter(event)" aria-label="Newsletter signup">
+          <div class="newsletter-input-wrap">
+            <input type="email" class="newsletter-input"
+                   placeholder="Your email address"
+                   aria-label="Enter email for newsletter"
+                   required />
+            <button type="submit" class="newsletter-submit" aria-label="Subscribe">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 MiniMe Boutique &nbsp;•&nbsp; Making families look beautiful together
+    </div>
+  </footer>
+
+  <!-- ===================== PRODUCT DETAIL MODAL ===================== -->
+  <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true"
+       aria-label="Product details">
+    <div class="modal-box">
+      <div class="modal-img-side">
+        <img id="modal-img" src="" alt="Product image" />
+        <button class="modal-close-btn" onclick="closeModal()" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body-side">
+        <div>
+          <span id="modal-colorway" class="modal-colorway"></span>
+          <h2 id="modal-title" class="modal-title font-serif"></h2>
+          <p id="modal-price" class="modal-price font-serif"></p>
+          <span class="modal-details-label">Item Informations</span>
+          <ul id="modal-details-list" class="modal-details-list" role="list"></ul>
+        </div>
+        <div>
+          <div style="margin-bottom:8px; font-family:'Montserrat',sans-serif; font-size:8.5px;
+                      font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-soft);">
+            Quantity
+          </div>
+          <div class="qty-selector" role="group" aria-label="Quantity selector">
+            <button class="qty-btn" onclick="changeModalQty(-1)" aria-label="Decrease quantity">−</button>
+            <span id="modal-qty-display" class="qty-display" aria-live="polite">1</span>
+            <button class="qty-btn" onclick="changeModalQty(1)" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="modal-add-btn" onclick="modalAddToCart()" aria-label="Add to cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== CHECKOUT MODAL ===================== -->
+  <div id="checkout-overlay" class="modal-overlay checkout-overlay" role="dialog" aria-modal="true"
+       aria-label="Checkout">
+    <div class="checkout-box">
+      <button class="modal-close-btn checkout-close-btn" onclick="closeCheckoutModal()" aria-label="Close checkout">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <!-- Step indicator -->
+      <div class="checkout-steps" id="checkout-steps">
+        <div class="checkout-step active" data-step="1">
+          <span class="step-num">1</span><span class="step-label">Details</span>
+        </div>
+        <div class="checkout-step-line"></div>
+        <div class="checkout-step" data-step="2">
+          <span class="step-num">2</span><span class="step-label">Shipping</span>
+        </div>
+        <div class="checkout-step-line"></div>
+        <div class="checkout-step" data-step="3">
+          <span class="step-num">3</span><span class="step-label">Confirm</span>
+        </div>
+      </div>
+
+      <!-- Step 1: Personal Details -->
+      <div id="checkout-step-1" class="checkout-step-panel">
+        <h2 class="checkout-title font-serif">Your Details</h2>
+        <div class="checkout-form-grid">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" id="co-fname" class="form-input" placeholder="Cheska" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" id="co-lname" class="form-input" placeholder="Santos" required />
+          </div>
+          <div class="form-group" style="grid-column:1/-1">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="co-email" class="form-input" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group" style="grid-column:1/-1">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" id="co-phone" class="form-input" placeholder="+63 9XX XXX XXXX" required />
+          </div>
+        </div>
+        <button class="checkout-next-btn" onclick="checkoutStep(2)">
+          Continue to Shipping
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Step 2: Shipping Details -->
+      <div id="checkout-step-2" class="checkout-step-panel hidden">
+        <h2 class="checkout-title font-serif">Shipping Address</h2>
+        <div class="checkout-form-grid">
+          <div class="form-group" style="grid-column:1/-1">
+            <label class="form-label">Street Address</label>
+            <input type="text" id="co-address" class="form-input" placeholder="House No., Street, Barangay" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">City / Municipality</label>
+            <input type="text" id="co-city" class="form-input" placeholder="City" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Province</label>
+            <input type="text" id="co-province" class="form-input" placeholder="Province" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">ZIP Code</label>
+            <input type="text" id="co-zip" class="form-input" placeholder="1234" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Region</label>
+            <select id="co-region" class="form-input">
+              <option>NCR</option>
+              <option>Region I</option>
+              <option>Region II</option>
+              <option>Region III</option>
+              <option selected>Region IV-A (CALABARZON)</option>
+              <option>Region IV-B</option>
+              <option>Region V</option>
+              <option>Region VI</option>
+              <option>Region VII</option>
+              <option>Region VIII</option>
+              <option>Region IX</option>
+              <option>Region X</option>
+              <option>Region XI</option>
+              <option>Region XII</option>
+              <option>CAR</option>
+              <option>BARMM</option>
+            </select>
+          </div>
+          <div class="form-group" style="grid-column:1/-1">
+            <label class="form-label">Order Notes (optional)</label>
+            <textarea id="co-notes" class="form-textarea" style="min-height:80px"
+                      placeholder="Special instructions, color preferences, size notes…"></textarea>
+          </div>
+        </div>
+        <div class="checkout-btn-row">
+          <button class="checkout-back-btn" onclick="checkoutStep(1)">← Back</button>
+          <button class="checkout-next-btn" onclick="checkoutStep(3)">
+            Review Order
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Order Review & Confirm -->
+      <div id="checkout-step-3" class="checkout-step-panel hidden">
+        <h2 class="checkout-title font-serif">Review Your Order</h2>
+        <div id="checkout-order-summary" class="checkout-order-summary"></div>
+        <div id="checkout-address-summary" class="checkout-address-summary"></div>
+
+        <div class="form-group" style="margin-top:20px">
+          <label class="form-label">Payment Method</label>
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" name="payment" value="gcash" checked />
+              <span>GCash</span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="cod" />
+              <span>Cash on Delivery</span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="bank" />
+              <span>Bank Transfer</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="checkout-btn-row">
+          <button class="checkout-back-btn" onclick="checkoutStep(2)">← Back</button>
+          <button class="checkout-confirm-btn" onclick="confirmOrder()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            Place Order
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 4: Success -->
+      <div id="checkout-step-success" class="checkout-step-panel hidden checkout-success">
+        <div class="success-icon">🎉</div>
+        <h2 class="checkout-title font-serif">Order Confirmed!</h2>
+        <p class="success-body">Thank you! Your order has been placed. We'll send a confirmation to your email.</p>
+        <div id="order-tracking-info" class="order-tracking-info"></div>
+        <p class="success-note font-serif">
+          We'll contact you within 24 hours with your tracking details.<br/>
+          Follow us on Instagram <strong>@minime_cg</strong> for updates!
+        </p>
+        <button class="checkout-next-btn" onclick="closeCheckoutModal(); showPage('home')">
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TOAST ===================== -->
+  <div id="toast" class="toast" role="alert" aria-live="assertive">
+    <div class="toast-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+    </div>
+    <div>
+      <div id="toast-title" class="toast-title"></div>
+      <div id="toast-sub"   class="toast-sub"></div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="js/app.js" defer></script>
+
+</body>
+</html>
