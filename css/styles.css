@@ -1,6 +1,6 @@
 /* theme ay pastel pink at gold hehe */
 
-/* --- CSS VARIABLES --- */
+/* --- css variabless --- */
 :root {
   --pink-50:  #FFF0F5;
   --pink-100: #FFD6E7;
@@ -485,7 +485,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
 }
 .atelier-image:hover img { transform: scale(1.08); }
 
-/* gallery section (best seller )*/
+/* gallery section (yung hapi fam)*/
 .families-section {
   padding: 96px 48px;
   background: linear-gradient(180deg, var(--pink-50) 0%, var(--cream) 100%);
@@ -1360,9 +1360,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
   }
 }
 
-/* =============================================
-   PRODUCTS GRID — 5 columns x 2 rows
-   ============================================= */
+/*  PRODUCTS GRID */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1371,9 +1369,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
   margin: 0 auto;
 }
 
-/* =============================================
-   CHECKOUT MODAL
-   ============================================= */
+/* CHECKOUT MODAL */
 .checkout-overlay {
   z-index: 300;
 }
@@ -1534,7 +1530,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
   box-shadow: 0 16px 40px var(--shadow-gold);
 }
 
-/* Order summary inside checkout */
+/* order summary inside checkout */
 .checkout-order-summary {
   background: var(--warm-white);
   border: 1px solid var(--border);
@@ -1583,7 +1579,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
   margin-bottom: 8px;
 }
 
-/* Payment options */
+/* payment options */
 .payment-options {
   display: flex;
   flex-direction: column;
@@ -1607,7 +1603,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
 .payment-option:hover { border-color: var(--pink-accent); background: var(--pink-50); }
 .payment-option input[type="radio"] { accent-color: var(--pink-accent); width: 16px; height: 16px; }
 
-/* Success screen */
+/* success screen */
 .checkout-success {
   text-align: center;
   padding: 20px 0;
@@ -1648,7 +1644,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
   margin-bottom: 8px;
 }
 
-/* Responsive — override products grid for smaller screens */
+/* responsive — override products grid for smaller screens */
 @media (max-width: 1280px) {
   .products-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
 }
