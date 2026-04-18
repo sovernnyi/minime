@@ -1,8 +1,6 @@
-/* ============================================================
-   MiniMe Boutique — app.js
-   ============================================================ */
+/*  MiniMe Boutique — app.js */
 
-// ─── CART STATE ───────────────────────────────────────────────
+// ─── CART STATE 
 let cart;
 try {
   cart = JSON.parse(localStorage.getItem('minime-cart')) || [];
@@ -325,7 +323,7 @@ function handleContact(e) {
   e.currentTarget.reset();
 }
 
-// ─── NEWSLETTER ─
+// ─── NEWSLETTER 
 function handleNewsletter(e) {
   e.preventDefault();
   const input = e.currentTarget.querySelector('input[type="email"]');
