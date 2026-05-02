@@ -554,42 +554,36 @@ function isStepValid(step) {
 function confirmOrder() {
     if (!isStepValid(1) || !isStepValid(2)) return;
 
-    // 1. Data
+    // 1. Calculate Data (Capture before clearing cart)
     const orderNum = 'MM-' + Date.now().toString().slice(-6);
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-    const discount = Math.round(subtotal * activeDiscount);
-    const total = (subtotal - discount) + (subtotal - discount >= 2500 ? 0 : 150);
+    const total = subtotal + (subtotal >= 2500 ? 0 : 150);
     const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
     const itemsSummary = cart.map(i => `${i.title} (x${i.qty})`).join(', ');
 
-    // 2. Fill 
+    // 2. Fill the HTML Data placeholders using the IDs we added to index.html
     document.getElementById('res-order-num').textContent = `#${orderNum}`;
     document.getElementById('res-items').textContent = itemsSummary;
     document.getElementById('res-total').textContent = `₱${total.toLocaleString()}`;
     document.getElementById('res-payment').textContent = payment.toUpperCase();
 
-    // 3. Transitions
+    // 3. UI Transition
     const stepHeader = document.getElementById('checkout-steps');
-    if (stepHeader) stepHeader.style.display = 'none';
+    if (stepHeader) stepHeader.style.display = 'none'; // Hides 1-2-3 circles
 
-    // Success
     document.getElementById('checkout-step-3').classList.add('hidden');
     document.getElementById('checkout-step-success').classList.remove('hidden');
 
-    // Reset cart
+    // 4. CLEAR CART & RESET UI
     cart = [];
     activeDiscount = 0;
     saveCart();       
     renderCart();
-    updateCartBadges();
+    updateCartBadges(); // This makes the header badge update too
 
-    // Scroll 
+    // Scroll to top of the modal
     const box = document.querySelector('.checkout-box');
     if (box) box.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // Email
-    const emailBody = encodeURIComponent(`Order #${orderNum}\nItems: ${itemsSummary}\nTotal: ₱${total.toLocaleString()}`);
-    window.open(`mailto:deargabclothing@gmail.com?subject=New Order ${orderNum}&body=${emailBody}`, '_blank');
 }
 
 // ─── PAGE NAVIGATION (SPA) 
