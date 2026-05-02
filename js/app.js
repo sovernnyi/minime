@@ -469,12 +469,12 @@ function isStepValid(step) {
 
     if (step === 2) {
         const region = document.getElementById('co-region')?.value;
-        const city = document.getElementById('co-city')?.value;
         const prov = document.getElementById('co-province')?.value.trim();
+        const city = document.getElementById('co-city')?.value;
         const addr = document.getElementById('co-address')?.value.trim();
         const zip = document.getElementById('co-zip')?.value.trim();
 
-        if (!region || !city || !prov || !addr || !zip) {
+        if (!region || !prov || !city || !addr || !zip) {
             showToast('Missing Info', 'Please complete your shipping address.');
             return false;
         }
@@ -557,93 +557,88 @@ Sent via MiniMe Boutique website.`
 
 // ─── PAGE NAVIGATION (SPA) 
 function showPage(pageName, scrollTo) {
-  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-  const target = document.getElementById('page-' + pageName);
-  if (target) target.classList.remove('hidden');
+    document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+    const target = document.getElementById('page-' + pageName);
+    if (target) target.classList.remove('hidden');
 
-  // Update active nav link
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    a.classList.toggle('active',
-      a.dataset.page === pageName && !a.dataset.scrollTo
-    );
-  });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active', a.dataset.page === pageName && !a.dataset.scrollTo);
+    });
 
-  if (scrollTo) {
-    // Small delay to allow page to render first
-    setTimeout(() => {
-      const section = document.getElementById(scrollTo);
-      if (section) section.scrollIntoView({ behavior: 'smooth' });
-    }, 50);
-  } else {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+    if (scrollTo) {
+        setTimeout(() => {
+            const section = document.getElementById(scrollTo);
+            if (section) section.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-  if (pageName === 'cart') renderCart();
+    if (pageName === 'cart') renderCart();
 }
 
 // ─── INIT 
 document.addEventListener('DOMContentLoaded', () => {
-  updateCartBadges();
+    updateCartBadges();
 
-  // Product card clicks → open modal
-  document.querySelectorAll('[data-product]').forEach(card => {
-    card.addEventListener('click', () => openModal(card.dataset.product));
-  });
-
-  // Nav page links
-  document.querySelectorAll('[data-page]').forEach(el => {
-    el.addEventListener('click', e => {
-      e.preventDefault();
-      const page     = el.dataset.page;
-      const scrollTo = el.dataset.scrollTo || null;
-      const scrollTop = el.dataset.scrollTop;
-
-      if (scrollTop) {
-        showPage(page);            // scrolls to top
-      } else {
-        showPage(page, scrollTo);  // optionally scrolls to section
-      }
+    document.querySelectorAll('[data-product]').forEach(card => {
+        card.addEventListener('click', () => openModal(card.dataset.product));
     });
-  });
 
-  // Close product modal on backdrop click or Escape
-  const modalOverlay = document.getElementById('modal-overlay');
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', e => {
-      if (e.target === modalOverlay) closeModal();
+    document.querySelectorAll('[data-page]').forEach(el => {
+        el.addEventListener('click', e => {
+            e.preventDefault();
+            const page = el.dataset.page;
+            const scrollTo = el.dataset.scrollTo || null;
+            const scrollTop = el.dataset.scrollTop;
+            if (scrollTop) showPage(page);
+            else showPage(page, scrollTo);
+        });
     });
-  }
 
-  // Close checkout modal on backdrop click
-  const checkoutOverlay = document.getElementById('checkout-overlay');
-  if (checkoutOverlay) {
-    checkoutOverlay.addEventListener('click', e => {
-      if (e.target === checkoutOverlay) closeCheckoutModal();
+    const modalOverlay = document.getElementById('modal-overlay');
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', e => {
+            if (e.target === modalOverlay) closeModal();
+        });
+    }
+
+    const checkoutOverlay = document.getElementById('checkout-overlay');
+    if (checkoutOverlay) {
+        checkoutOverlay.addEventListener('click', e => {
+            if (e.target === checkoutOverlay) closeCheckoutModal();
+        });
+    }
+
+    window.addEventListener('keydown', e => {
+        if (e.key === 'Escape') { closeModal(); closeCheckoutModal(); }
     });
-  }
 
-  window.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeModal(); closeCheckoutModal(); }
-  });
-
-  // Show home page by default
-  showPage('home');
+    showPage('home');
 });
 
 // ─── MOBILE MENU 
 document.addEventListener('DOMContentLoaded', () => {
-  const hamburger = document.querySelector('.hamburger');
-  const navLinks  = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
 
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('mobile-open');
-    });
-  }
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-open');
+        });
+    }
 
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('mobile-open');
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('mobile-open');
+        });
     });
-  });
 });
+
+
+
+
+
+
+
+
