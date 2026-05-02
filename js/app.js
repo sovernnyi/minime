@@ -181,28 +181,21 @@ const phLocationData = {
         }
     },
     "Region IV-A (CALABARZON)": {
-        "Rizal": {
-            "Antipolo": "1870", "Taytay": "1920", "Cainta": "1900", "Angono": "1930",
-            "Binangonan": "1940", "San Mateo": "1850", "Rodriguez": "1860"
-        },
-        "Cavite": {
-            "Bacoor": "4102", "Dasmariñas": "4114", "Imus": "4103", "Tagaytay": "4120",
-            "Silang": "4118", "General Trias": "4107", "Tanza": "4108"
-        },
-        "Laguna": {
-            "Calamba": "4027", "Santa Rosa": "4026", "Biñan": "4024", "San Pablo": "4000", "Cabuyao": "4025"
-        },
-        "Batangas": {
-            "Batangas City": "4200", "Lipa": "4217", "Tanauan": "4232", "Nasugbu": "4231"
-        }
+        "Rizal": { "Antipolo": "1870", "Taytay": "1920", "Cainta": "1900", "Angono": "1930" },
+        "Cavite": { "Bacoor": "4102", "Dasmariñas": "4114", "Imus": "4103", "Tagaytay": "4120" },
+        "Laguna": { "Calamba": "4027", "Santa Rosa": "4026", "Biñan": "4024", "San Pablo": "4000" },
+        "Batangas": { "Batangas City": "4200", "Lipa": "4217", "Tanauan": "4232" },
+        "Quezon": { "Lucena": "4301", "Tayabas": "4327", "Sariaya": "4322", "Candelaria": "4317" }
     },
-    "Region III (Central Luzon)": {
-        "Bulacan": {
-            "Malolos": "3000", "Meycauayan": "3020", "San Jose del Monte": "3023", "Baliuag": "3006"
-        },
-        "Pampanga": {
-            "San Fernando": "2000", "Angeles": "2009", "Mabalacat": "2010"
-        }
+    "Region I (Ilocos Region)": {
+        "Ilocos Norte": { "Laoag": "2900", "Batac": "2906" },
+        "Ilocos Sur": { "Vigan": "2700", "Candon": "2710" },
+        "Pangasinan": { "Dagupan": "2400", "Urdaneta": "2428", "San Carlos": "2420" }
+    },
+    "Region VI (Western Visayas)": {
+        "Iloilo": { "Iloilo City": "5000", "Passi": "5037" },
+        "Negros Occidental": { "Bacolod": "6100", "Talisay": "6115", "Silay": "6116" },
+        "Capiz": { "Roxas City": "5800" }
     }
 };
 
@@ -625,7 +618,15 @@ Sent via MiniMe Boutique website.`
     cart = [];
     activeDiscount = 0;
     saveCart();
-    checkoutStep('success');
+
+    // Show the success panel
+    document.getElementById('checkout-step-3').classList.add('hidden');
+    document.getElementById('checkout-step-success').classList.remove('hidden');
+
+    // Scroll to top of modal so user sees the "Order Confirmed" message
+    const box = document.querySelector('.checkout-box');
+    if (box) box.scrollTo({ top: 0, behavior: 'smooth' });
+
     showToast('Order placed! 🎉', 'Check your email for confirmation.');
 }
 
