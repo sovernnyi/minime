@@ -427,6 +427,25 @@ function confirmOrder() {
     return;
   }
 
+  // ALL VALIDATION
+  
+  // For letters only (includes spaces for names/cities)
+  const lettersOnly = /^[A-Za-z\s]+$/;
+  // For numbers only
+  const numbersOnly = /^[0-9]+$/;
+
+  // Validate Names, City, and Province (No numbers allowed)
+  if (!lettersOnly.test(fname) || !lettersOnly.test(lname) || !lettersOnly.test(city) || !lettersOnly.test(prov)) {
+    showToast('Invalid Format', 'Names, City, and Province should not contain numbers.');
+    return;
+  }
+
+  // Validate Phone and Zip (No letters allowed)
+  if (!numbersOnly.test(phone) || !numbersOnly.test(zip)) {
+    showToast('Invalid Format', 'Phone and Zip code should only contain numbers.');
+    return;
+  }
+
   // Build a readable order number
   const orderNum = 'MM-' + Date.now().toString().slice(-6);
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
