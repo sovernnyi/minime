@@ -566,8 +566,6 @@ function confirmOrder() {
     const notes = document.getElementById('co-notes')?.value.trim() || 'None';
     const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
 
-    if (!isStepValid(1) || !isStepValid(2)) return;
-
     // Generate Order Info
     const orderNum = 'MM-' + Date.now().toString().slice(-6);
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
@@ -592,7 +590,7 @@ function confirmOrder() {
 
     // Prepare and Open Email
     const itemList = cart.map(i => `${i.title} x${i.qty}`).join(', ');
-    const emailBody = encodeURIComponent(`Order #${orderNum}\nItems: ${itemList}\nTotal: ₱${total.toLocaleString()}`);
+    const emailBody = encodeURIComponent(`NEW ORDER #${orderNum}\n\nCustomer: ${fname} ${lname}\nItems: ${itemList}\n\nTotal: ₱${total.toLocaleString()}`);
 
     setTimeout(() => {
         window.open(`mailto:deargabclothing@gmail.com?subject=${encodeURIComponent('New Order #' + orderNum)}&body=${emailBody}`, '_blank');
@@ -602,18 +600,17 @@ function confirmOrder() {
     cart = [];
     activeDiscount = 0;
     saveCart();       
-    renderCart();    
+    renderCart();
+    updateCartBadges(); // Ensure the header badge updates too
 
-    // Show the success panel
+    // 6. Show the success panel
     document.getElementById('checkout-step-3').classList.add('hidden');
     document.getElementById('checkout-step-success').classList.remove('hidden');
 
-    cart = [];
-    activeDiscount = 0;
-    saveCart();       
-    updateCartBadges();
-    
-    showToast('Order placed! 🎉', 'Thank you for shopping.');
+    const box = document.querySelector('.checkout-box');
+    if (box) box.scrollTo({ top: 0, behavior: 'smooth' });
+    showToast('Order placed! 🎉', 'Check your email for confirmation.');
+}
 
 // ─── PAGE NAVIGATION (SPA) 
 function showPage(pageName, scrollTo) {
@@ -650,9 +647,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const page = el.dataset.page;
             const scrollTo = el.dataset.scrollTo || null;
-            const scrollTop = el.dataset.scrollTop;
-            if (scrollTop) showPage(page);
-            else showPage(page, scrollTo);
+            showPage(page, scrollTo);
         });
     });
 
@@ -670,7 +665,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    window.addEventListener('keydown', e => {
+   window.addEventListener('keydown', e => {
         if (e.key === 'Escape') { closeModal(); closeCheckoutModal(); }
     });
 
@@ -694,4 +689,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
