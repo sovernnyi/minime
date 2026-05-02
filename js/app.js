@@ -449,7 +449,7 @@ function buildOrderReview() {
 // STEP VALIDATION
 function isStepValid(step) {
   const lettersOnly = /^[A-Za-z\s]+$/;
-  const numbersOnly = /^[0-9]+$/;
+  const numbersOnly = /^[0-9,+]+$/;
 
   if (step === 1) {
     const fname = document.getElementById('co-fname')?.value.trim();
@@ -461,7 +461,7 @@ function isStepValid(step) {
       return false;
     }
     if (!numbersOnly.test(phone)) {
-      showToast('Invalid Phone', 'Phone number should only contain letters.');
+      showToast('Invalid Phone', 'Phone number should only contain numbers.');
       return false;
     }
   }
