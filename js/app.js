@@ -420,7 +420,7 @@ function buildOrderReview() {
   const lname = document.getElementById('co-lname')?.value || '';
   const addr  = document.getElementById('co-address')?.value || '';
   const city  = document.getElementById('co-city')?.value || '';
-  const prov  = document.getElementById('co-province')?.value || '';
+  const region = document.getElementById('co-region')?.value || '';
   const zip   = document.getElementById('co-zip')?.value || '';
 
   const summaryEl = document.getElementById('checkout-order-summary');
@@ -439,15 +439,19 @@ function buildOrderReview() {
   const addrEl = document.getElementById('checkout-address-summary');
   if (addrEl) {
     addrEl.innerHTML = `
-      <strong>Shipping To</strong>
+      <strong>Shipping To</strong><br/>
       ${fname} ${lname}<br/>
-      ${addr}, ${city}, ${prov} ${zip}
+      ${addr}, ${city}, ${region} ${zip}
     `;
   }
 }
 
 // STEP VALIDATION
 function isStepValid(step) {
+  const lettersOnly = /^[A-Za-z\s]+$/;
+  const numbersOnly = /^[0-9]+$/;
+
+  function isStepValid(step) {
   const lettersOnly = /^[A-Za-z\s]+$/;
   const numbersOnly = /^[0-9,+]+$/;
 
@@ -456,88 +460,79 @@ function isStepValid(step) {
     const lname = document.getElementById('co-lname')?.value.trim();
     const phone = document.getElementById('co-phone')?.value.trim();
 
+    if (!fname || !lname || !phone) {
+      showToast('Missing Info', 'Please fill out all fields.');
+      return false;
+    }
     if (!lettersOnly.test(fname) || !lettersOnly.test(lname)) {
       showToast('Invalid Name', 'Names should not contain numbers.');
       return false;
     }
-    if (!numbersOnly.test(phone)) {
-      showToast('Invalid Phone', 'Phone number should only contain numbers.');
-      return false;
-    }
+    return true;
   }
-
   if (step === 2) {
     const city = document.getElementById('co-city')?.value;
     const region = document.getElementById('co-region')?.value;
+    const addr = document.getElementById('co-address')?.value.trim();
     const zip = document.getElementById('co-zip')?.value.trim();
 
-    if (!city || !region) {
-      showToast('Missing Info', 'Please select your Region and City.');
+    if (!city || !region || !addr || !zip) {
+      showToast('Missing Info', 'Please complete your shipping address.');
       return false;
     }
     if (!numbersOnly.test(zip)) {
       showToast('Invalid Zip', 'Zip code should only contain numbers.');
       return false;
     }
-      return true;
+    return true;
   }
-      return true;
+  return true;
 }
 
 function confirmOrder() {
-  // Gather all fields
-  const fname   = document.getElementById('co-fname')?.value.trim();
-  const lname   = document.getElementById('co-lname')?.value.trim();
-  const email   = document.getElementById('co-email')?.value.trim();
-  const phone   = document.getElementById('co-phone')?.value.trim();
+  const fname = document.getElementById('co-fname')?.value.trim();
+  const lname = document.getElementById('co-lname')?.value.trim();
+  const email = document.getElementById('co-email')?.value.trim();
+  const phone = document.getElementById('co-phone')?.value.trim();
   const address = document.getElementById('co-address')?.value.trim();
-  const city    = document.getElementById('co-city')?.value.trim();
-  const prov    = document.getElementById('co-province')?.value.trim();
-  const zip     = document.getElementById('co-zip')?.value.trim();
-  const notes   = document.getElementById('co-notes')?.value.trim() || 'None';
+  const city = document.getElementById('co-city')?.value.trim();
+  const region = document.getElementById('co-region')?.value.trim(); // Changed from prov
+  const zip = document.getElementById('co-zip')?.value.trim();
+  const notes = document.getElementById('co-notes')?.value.trim() || 'None';
   const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
 
-  // NEW FUNCTION
   if (!isStepValid(1) || !isStepValid(2)) return;
 
-  if (!fname || !lname || !email || !phone || !address || !city || !prov || !zip) {
-    showToast('Missing info', 'Please complete all required fields.');
-    return;
-  }
-
-  // Build a readable order number
   const orderNum = 'MM-' + Date.now().toString().slice(-6);
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const discount  = Math.round(subtotal * activeDiscount);
+  const discount = Math.round(subtotal * activeDiscount);
   const discounted = subtotal - discount;
-  const shipping  = discounted >= 2500 ? 0 : 150;
-  const total     = discounted + shipping;
+  const shipping = discounted >= 2500 ? 0 : 150;
+  const total = discounted + shipping;
 
-  // Show tracking info
   const trackEl = document.getElementById('order-tracking-info');
   if (trackEl) {
     trackEl.innerHTML = `
-      <strong>Order Reference</strong>
+      <strong>Order Reference</strong><br/>
       Order #${orderNum}<br/>
       ${fname} ${lname} • ${email} • ${phone}<br/>
-      ${address}, ${city}, ${prov} ${zip}<br/>
+      ${address}, ${city}, ${region} ${zip}<br/>
       Payment: ${payment.toUpperCase()} • Total: ₱${total.toLocaleString()}
     `;
   }
 
-  // Build email body for the store owner
   const itemList = cart.map(i => `  - ${i.title} × ${i.qty} = ₱${(i.price * i.qty).toLocaleString()}`).join('\n');
   const emailBody = encodeURIComponent(
 `🎉 NEW ORDER #${orderNum}
 
 CUSTOMER:
-  Name:    ${fname} ${lname}
-  Email:   ${email}
-  Phone:   ${phone}
+  Name:     ${fname} ${lname}
+  Email:    ${email}
+  Phone:    ${phone}
 
 SHIPPING ADDRESS:
   ${address}
-  ${city}, ${prov} ${zip}
+  ${city}, ${region} ${zip}
 
 ITEMS:
 ${itemList}
@@ -553,13 +548,8 @@ NOTES: ${notes}
 Sent via MiniMe Boutique website.`
   );
 
-  // Open email to store
-  window.open(
-    `mailto:deargabclothing@gmail.com?subject=${encodeURIComponent('New Order #' + orderNum + ' — MiniMe Boutique')}&body=${emailBody}`,
-    '_blank'
-  );
+  window.open(`mailto:deargabclothing@gmail.com?subject=${encodeURIComponent('New Order #' + orderNum)}&body=${emailBody}`, '_blank');
 
-  // Clear cart and show success
   cart = [];
   activeDiscount = 0;
   saveCart();
