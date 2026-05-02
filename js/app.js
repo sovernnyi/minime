@@ -479,7 +479,10 @@ function isStepValid(step) {
       showToast('Invalid Zip', 'Zip code should only contain numbers.');
       return false;
     }
+      return true;
   }
+      return true;
+}
 
 function confirmOrder() {
   // Gather all fields
