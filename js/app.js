@@ -554,7 +554,7 @@ function isStepValid(step) {
 function confirmOrder() {
     if (!isStepValid(1) || !isStepValid(2)) return;
 
-    // Calculations
+    // 1. Data
     const orderNum = 'MM-' + Date.now().toString().slice(-6);
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
     const discount = Math.round(subtotal * activeDiscount);
@@ -562,19 +562,19 @@ function confirmOrder() {
     const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
     const itemsSummary = cart.map(i => `${i.title} (x${i.qty})`).join(', ');
 
-    // Fill the HTML placeholders
+    // 2. Fill 
     document.getElementById('res-order-num').textContent = `#${orderNum}`;
     document.getElementById('res-items').textContent = itemsSummary;
     document.getElementById('res-total').textContent = `₱${total.toLocaleString()}`;
     document.getElementById('res-payment').textContent = payment.toUpperCase();
 
-    // UI transition 
+    // 3. Transitions
     const stepHeader = document.getElementById('checkout-steps');
     if (stepHeader) stepHeader.style.display = 'none';
 
+    // Success
     document.getElementById('checkout-step-3').classList.add('hidden');
-    const successPanel = document.getElementById('checkout-step-success');
-    successPanel.classList.remove('hidden');
+    document.getElementById('checkout-step-success').classList.remove('hidden');
 
     // Reset cart
     cart = [];
@@ -583,13 +583,13 @@ function confirmOrder() {
     renderCart();
     updateCartBadges();
 
-    // Scroll to top
+    // Scroll 
     const box = document.querySelector('.checkout-box');
     if (box) box.scrollTo({ top: 0, behavior: 'smooth' });
-    
+
     // Email
-    const emailBody = encodeURIComponent(`New Order #${orderNum}\nItems: ${itemsSummary}\nTotal: ₱${total.toLocaleString()}`);
-    window.open(`mailto:deargabclothing@gmail.com?subject=Order ${orderNum}&body=${emailBody}`, '_blank');
+    const emailBody = encodeURIComponent(`Order #${orderNum}\nItems: ${itemsSummary}\nTotal: ₱${total.toLocaleString()}`);
+    window.open(`mailto:deargabclothing@gmail.com?subject=New Order ${orderNum}&body=${emailBody}`, '_blank');
 }
 
 // ─── PAGE NAVIGATION (SPA) 
