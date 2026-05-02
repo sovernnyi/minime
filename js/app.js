@@ -174,22 +174,62 @@ const PRODUCTS = {
 
 // LOCATION DATA
 const phLocationData = {
-    "Region IV-A": {
-        "Rizal": {
-            "Antipolo": "1870",
-            "Taytay": "1920",
-            "Cainta": "1900"
-        },
-        "Cavite": {
-            "Bacoor": "4102",
-            "Dasmariñas": "4114"
-        }
-    },
     "NCR": {
         "Metro Manila": {
             "Manila": "1000",
             "Makati": "1200",
-            "Quezon City": "1100"
+            "Quezon City": "1100",
+            "Pasig": "1600",
+            "Taguig": "1630",
+            "Mandaluyong": "1550",
+            "Marikina": "1800",
+            "Las Piñas": "1740"
+        }
+    },
+    "Region IV-A (CALABARZON)": {
+        "Rizal": {
+            "Antipolo": "1870",
+            "Taytay": "1920",
+            "Cainta": "1900",
+            "Angono": "1930",
+            "Binangonan": "1940",
+            "San Mateo": "1850",
+            "Rodriguez": "1860"
+        },
+        "Cavite": {
+            "Bacoor": "4102",
+            "Dasmariñas": "4114",
+            "Imus": "4103",
+            "Tagaytay": "4120",
+            "Silang": "4118",
+            "General Trias": "4107",
+            "Tanza": "4108"
+        },
+        "Laguna": {
+            "Calamba": "4027",
+            "Santa Rosa": "4026",
+            "Biñan": "4024",
+            "San Pablo": "4000",
+            "Cabuyao": "4025"
+        },
+        "Batangas": {
+            "Batangas City": "4200",
+            "Lipa": "4217",
+            "Tanauan": "4232",
+            "Nasugbu": "4231"
+        }
+    },
+    "Region III (Central Luzon)": {
+        "Bulacan": {
+            "Malolos": "3000",
+            "Meycauayan": "3020",
+            "San Jose del Monte": "3023",
+            "Baliuag": "3006"
+        },
+        "Pampanga": {
+            "San Fernando": "2000",
+            "Angeles": "2009",
+            "Mabalacat": "2010"
         }
     }
 };
@@ -246,6 +286,7 @@ function updateProvinces() {
         zipInput.value = phLocationData[region][province][city];
         // Lock the field so users cannot edit it
         zipInput.readOnly = true; 
+        zipInput.style.backgroundColor = "#f9f9f9"; 
     }
 }
 
@@ -496,7 +537,7 @@ function buildOrderReview() {
 // STEP VALIDATION
 function isStepValid(step) {
     const lettersOnly = /^[A-Za-z\s]+$/;
-    const numbersOnly = /^[0-9,+]+$/;
+    const phonePattern = /^(09|\+639)\d{9}$/;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (step === 1) {
@@ -510,14 +551,20 @@ function isStepValid(step) {
             showToast('Missing Info', 'Please fill out all fields in Step 1.');
             return false;
         }
-        
-        // 2. Email Validation (@ check)
+
+        // 2. Phone Validation
+        if (!phonePattern.test(phone)) {
+            showToast('Invalid Phone', 'Please use a valid PH mobile number (e.g., 09123456789).');
+            return false;
+        }
+      
+        // 3. Email Validation (@ check)
         if (!emailPattern.test(email)) {
             showToast('Invalid Email', 'Please enter a valid email address containing "@".');
             return false;
         }
 
-        // 3. Name Validation
+        // 4. Name Validation
         if (!lettersOnly.test(fname) || !lettersOnly.test(lname)) {
             showToast('Invalid Name', 'Names should not contain numbers.');
             return false;
@@ -688,11 +735,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-
-
-
-
-
-
 
