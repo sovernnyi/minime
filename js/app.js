@@ -557,8 +557,6 @@ function confirmOrder() {
     // 1. Gather Data
     const fname = document.getElementById('co-fname')?.value.trim();
     const lname = document.getElementById('co-lname')?.value.trim();
-    const email = document.getElementById('co-email')?.value.trim();
-    const phone = document.getElementById('co-phone')?.value.trim();
     const address = document.getElementById('co-address')?.value.trim();
     const city = document.getElementById('co-city')?.value.trim();
     const region = document.getElementById('co-region')?.value.trim(); 
@@ -569,31 +567,35 @@ function confirmOrder() {
     const orderNum = 'MM-' + Date.now().toString().slice(-6);
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
     const discount = Math.round(subtotal * activeDiscount);
-    const discounted = subtotal - discount;
-    const shipping = discounted >= 2500 ? 0 : 150;
-    const total = discounted + shipping;
+    const total = (subtotal - discount) + (subtotal - discount >= 2500 ? 0 : 150);
 
-    // 3. Update the Success Tracking Info UI
+    // 3. Update 
     const trackEl = document.getElementById('order-tracking-info');
     if (trackEl) {
         trackEl.innerHTML = `
-            <div style="text-align:left; margin-top:15px; padding:15px; background:#fdf8f5; border-radius:8px; font-size:12px; line-height:1.6;">
-                <strong>Order Reference: #${orderNum}</strong><br/>
-                <strong>Customer:</strong> ${fname} ${lname}<br/>
-                <strong>Shipping:</strong> ${address}, ${city}, ${region} ${zip}<br/>
-                <strong>Payment Method:</strong> ${payment.toUpperCase()}<br/>
-                <strong>Total Amount:</strong> ₱${total.toLocaleString()}
+            <div class="success-summary-box">
+                <h3>Order Summary</h3>
+                <p><strong>Order Reference:</strong> #${orderNum}</p>
+                <p><strong>Ship to:</strong> ${fname} ${lname}</p>
+                <p><strong>Address:</strong> ${address}, ${city}, ${region} ${zip}</p>
+                <p><strong>Total Amount Paid:</strong> ₱${total.toLocaleString()}</p>
+                <p><strong>Payment:</strong> ${payment.toUpperCase()}</p>
             </div>
         `;
     }
+
+     // 3. Switch panels
+    const stepIndicators = document.getElementById('checkout-steps');
+    if (stepIndicators) stepIndicators.style.display = 'none';
+
+    document.getElementById('checkout-step-3').classList.add('hidden');
+    document.getElementById('checkout-step-success').classList.remove('hidden');
 
     // 4. Prepare and Open Email
     const itemList = cart.map(i => `${i.title} x${i.qty}`).join(', ');
     const emailBody = encodeURIComponent(`NEW ORDER #${orderNum}\n\nCustomer: ${fname} ${lname}\nItems: ${itemList}\n\nTotal: ₱${total.toLocaleString()}`);
 
-    setTimeout(() => {
-        window.open(`mailto:deargabclothing@gmail.com?subject=${encodeURIComponent('New Order #' + orderNum)}&body=${emailBody}`, '_blank');
-    }, 500);    
+    window.open(`mailto:deargabclothing@gmail.com?subject=Order ${orderNum}&body=${emailBody}`, '_blank');  
 
     // 5. CLEAR CART & RESET UI
     cart = [];
@@ -608,7 +610,6 @@ function confirmOrder() {
 
     const box = document.querySelector('.checkout-box');
     if (box) box.scrollTo({ top: 0, behavior: 'smooth' });
-    showToast('Order placed! 🎉', 'Check your email for confirmation.');
 }
 
 // ─── PAGE NAVIGATION (SPA) 
