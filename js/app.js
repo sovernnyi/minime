@@ -552,48 +552,44 @@ function isStepValid(step) {
 }
 
 function confirmOrder() {
-   
     if (!isStepValid(1) || !isStepValid(2)) return;
-
-    // Data from input
-    const fname = document.getElementById('co-fname')?.value.trim() || '';
-    const lname = document.getElementById('co-lname')?.value.trim() || '';
-    const address = document.getElementById('co-address')?.value.trim() || '';
-    const city = document.getElementById('co-city')?.value.trim() || '';
-    const region = document.getElementById('co-region')?.value.trim() || '';
-    const zip = document.getElementById('co-zip')?.value.trim() || '';
-    const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
 
     // Calculations
     const orderNum = 'MM-' + Date.now().toString().slice(-6);
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
     const discount = Math.round(subtotal * activeDiscount);
     const total = (subtotal - discount) + (subtotal - discount >= 2500 ? 0 : 150);
+    const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
     const itemsSummary = cart.map(i => `${i.title} (x${i.qty})`).join(', ');
 
-    // Fill the data
+    // Fill the HTML placeholders
     document.getElementById('res-order-num').textContent = `#${orderNum}`;
     document.getElementById('res-items').textContent = itemsSummary;
     document.getElementById('res-total').textContent = `₱${total.toLocaleString()}`;
     document.getElementById('res-payment').textContent = payment.toUpperCase();
 
-    // Transition
+    // UI transition 
     const stepHeader = document.getElementById('checkout-steps');
     if (stepHeader) stepHeader.style.display = 'none';
 
-    // Success panel
     document.getElementById('checkout-step-3').classList.add('hidden');
-    document.getElementById('checkout-step-success').classList.remove('hidden');
+    const successPanel = document.getElementById('checkout-step-success');
+    successPanel.classList.remove('hidden');
 
-    // Reset 
+    // Reset cart
     cart = [];
     activeDiscount = 0;
     saveCart();       
     renderCart();
     updateCartBadges();
 
+    // Scroll to top
     const box = document.querySelector('.checkout-box');
     if (box) box.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Email
+    const emailBody = encodeURIComponent(`New Order #${orderNum}\nItems: ${itemsSummary}\nTotal: ₱${total.toLocaleString()}`);
+    window.open(`mailto:deargabclothing@gmail.com?subject=Order ${orderNum}&body=${emailBody}`, '_blank');
 }
 
 // ─── PAGE NAVIGATION (SPA) 
