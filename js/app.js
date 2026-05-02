@@ -552,9 +552,9 @@ function isStepValid(step) {
 }
 
 function confirmOrder() {
-
     if (!isStepValid(1) || !isStepValid(2)) return;
-    // Gather Data
+
+    // 1. Gather Data
     const fname = document.getElementById('co-fname')?.value.trim();
     const lname = document.getElementById('co-lname')?.value.trim();
     const email = document.getElementById('co-email')?.value.trim();
@@ -563,10 +563,9 @@ function confirmOrder() {
     const city = document.getElementById('co-city')?.value.trim();
     const region = document.getElementById('co-region')?.value.trim(); 
     const zip = document.getElementById('co-zip')?.value.trim();
-    const notes = document.getElementById('co-notes')?.value.trim() || 'None';
     const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
 
-    // Generate Order Info
+    // 2. Generate Order Info
     const orderNum = 'MM-' + Date.now().toString().slice(-6);
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
     const discount = Math.round(subtotal * activeDiscount);
@@ -574,7 +573,7 @@ function confirmOrder() {
     const shipping = discounted >= 2500 ? 0 : 150;
     const total = discounted + shipping;
 
-    // 4. Update the Success Tracking Info UI
+    // 3. Update the Success Tracking Info UI
     const trackEl = document.getElementById('order-tracking-info');
     if (trackEl) {
         trackEl.innerHTML = `
@@ -588,20 +587,20 @@ function confirmOrder() {
         `;
     }
 
-    // Prepare and Open Email
+    // 4. Prepare and Open Email
     const itemList = cart.map(i => `${i.title} x${i.qty}`).join(', ');
     const emailBody = encodeURIComponent(`NEW ORDER #${orderNum}\n\nCustomer: ${fname} ${lname}\nItems: ${itemList}\n\nTotal: ₱${total.toLocaleString()}`);
 
     setTimeout(() => {
         window.open(`mailto:deargabclothing@gmail.com?subject=${encodeURIComponent('New Order #' + orderNum)}&body=${emailBody}`, '_blank');
     }, 500);    
-`    
-    // 6. CLEAR CART & RESET UI
+
+    // 5. CLEAR CART & RESET UI
     cart = [];
     activeDiscount = 0;
     saveCart();       
     renderCart();
-    updateCartBadges(); // Ensure the header badge updates too
+    updateCartBadges();
 
     // 6. Show the success panel
     document.getElementById('checkout-step-3').classList.add('hidden');
@@ -638,10 +637,12 @@ function showPage(pageName, scrollTo) {
 document.addEventListener('DOMContentLoaded', () => {
     updateCartBadges();
 
+    // Product Modal listeners
     document.querySelectorAll('[data-product]').forEach(card => {
         card.addEventListener('click', () => openModal(card.dataset.product));
     });
 
+    // Navigation listeners
     document.querySelectorAll('[data-page]').forEach(el => {
         el.addEventListener('click', e => {
             e.preventDefault();
@@ -651,6 +652,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Overlay listeners
     const modalOverlay = document.getElementById('modal-overlay');
     if (modalOverlay) {
         modalOverlay.addEventListener('click', e => {
@@ -665,7 +667,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-   window.addEventListener('keydown', e => {
+    window.addEventListener('keydown', e => {
         if (e.key === 'Escape') { closeModal(); closeCheckoutModal(); }
     });
 
