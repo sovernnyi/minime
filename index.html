@@ -914,13 +914,14 @@
           
           <!-- Region Selection -->
           <div class="form-group">
-            <label class="form-label">Region</label>
-             <select id="co-region" class="form-input" onchange="updateProvinces()">
-             <option value="" disabled selected>Select Region</option>
-             <option value="NCR">NCR</option>
-             <option value="Region IV-A">Region IV-A (CALABARZON)</option>
-             </select>
-          </div>
+      <label class="form-label">Region</label>
+       <select id="co-region" class="form-input" onchange="updateProvinces()">
+         <option value="" disabled selected>Select Region</option>
+         <option value="NCR">NCR</option>
+         <option value="Region IV-A (CALABARZON)">Region IV-A (CALABARZON)</option>
+         <option value="Region III (Central Luzon)">Region III (Central Luzon)</option>
+       </select>
+    </div>
 
           <!-- Province Selection -->
           <div class="form-group">
@@ -980,10 +981,6 @@
             <label class="payment-option">
               <input type="radio" name="payment" value="cod" />
               <span>Cash on Delivery</span>
-            </label>
-            <label class="payment-option">
-              <input type="radio" name="payment" value="bank" />
-              <span>Bank Transfer</span>
             </label>
           </div>
         </div>
