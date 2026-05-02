@@ -446,7 +446,7 @@ function buildOrderReview() {
   }
 }
 
-// NEW FUNCTION
+// STEP VALIDATION
 function isStepValid(step) {
   const lettersOnly = /^[A-Za-z\s]+$/;
   const numbersOnly = /^[0-9]+$/;
@@ -461,18 +461,18 @@ function isStepValid(step) {
       return false;
     }
     if (!numbersOnly.test(phone)) {
-      showToast('Invalid Phone', 'Phone number should only contain letters.');
+      showToast('Invalid Phone', 'Phone number should only contain numbers.');
       return false;
     }
   }
 
   if (step === 2) {
-    const city = document.getElementById('co-city')?.value.trim();
-    const prov = document.getElementById('co-province')?.value.trim();
+    const city = document.getElementById('co-city')?.value;
+    const region = document.getElementById('co-region')?.value;
     const zip = document.getElementById('co-zip')?.value.trim();
 
-    if (!lettersOnly.test(city) || !lettersOnly.test(prov)) {
-      showToast('Invalid Format', 'City and Province should not contain numbers.');
+    if (!city || !region) {
+      showToast('Missing Info', 'Please select your Region and City.');
       return false;
     }
     if (!numbersOnly.test(zip)) {
@@ -480,10 +480,6 @@ function isStepValid(step) {
       return false;
     }
   }
-  return true;
-}
-
-
 
 function confirmOrder() {
   // Gather all fields
