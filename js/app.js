@@ -174,31 +174,78 @@ const PRODUCTS = {
 
 // LOCATION DATA
 const phLocationData = {
-    "NCR": ["Manila", "Quezon City", "Makati", "Taguig", "Pasig", "Caloocan"],
-    "Region III": ["Angeles City", "San Fernando", "Malolos", "Tarlac City", "Olongapo"],
-    "Region IV-A": ["Antipolo", "Bacoor", "Calamba", "Dasmariñas", "Lucena", "Taytay", "Cainta"],
-    "Region V": ["Legazpi", "Naga", "Iriga", "Tabaco", "Sorsogon City"]
+    "Region IV-A": {
+        "Rizal": {
+            "Antipolo": "1870",
+            "Taytay": "1920",
+            "Cainta": "1900"
+        },
+        "Cavite": {
+            "Bacoor": "4102",
+            "Dasmariñas": "4114"
+        }
+    },
+    "NCR": {
+        "Metro Manila": {
+            "Manila": "1000",
+            "Makati": "1200",
+            "Quezon City": "1100"
+        }
+    }
 };
 
-// Function to update the City dropdown
-function updateCities() {
-    const regionDropdown = document.getElementById('co-region');
-    const cityDropdown = document.getElementById('co-city');
-    if (!regionDropdown || !cityDropdown) return;
+// UPDATE PROVINCE
+function updateProvinces() {
+    const region = document.getElementById('co-region').value;
+    const provSelect = document.getElementById('co-province');
+    const citySelect = document.getElementById('co-city');
+    const zipInput = document.getElementById('co-zip');
 
-    const selectedRegion = regionDropdown.value;
+    provSelect.innerHTML = '<option value="" disabled selected>Select Province</option>';
+    citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+    zipInput.value = '';
+    zipInput.readOnly = true;
 
-    // Clear current cities
-    cityDropdown.innerHTML = '<option value="" disabled selected>Select City</option>';
-
-    // Populate with new cities
-    if (phLocationData[selectedRegion]) {
-        phLocationData[selectedRegion].forEach(city => {
-            const option = document.createElement('option');
-            option.value = city;
-            option.textContent = city;
-            cityDropdown.appendChild(option);
+    if (phLocationData[region]) {
+        Object.keys(phLocationData[region]).forEach(prov => {
+            const opt = document.createElement('option');
+            opt.value = prov;
+            opt.textContent = prov;
+            provSelect.appendChild(opt);
         });
+    }
+}
+
+    // UPDATE CITIES
+    function updateCities() {
+    const region = document.getElementById('co-region').value;
+    const province = document.getElementById('co-province').value;
+    const citySelect = document.getElementById('co-city');
+    const zipInput = document.getElementById('co-zip');
+    
+    citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+    zipInput.value = '';
+
+    if (phLocationData[region] && phLocationData[region][province]) {
+        Object.keys(phLocationData[region][province]).forEach(city => {
+            const opt = document.createElement('option');
+            opt.value = city;
+            opt.textContent = city;
+            citySelect.appendChild(opt);
+        });
+    }
+}
+    // UPDATE ZIP (AUTOMATIC)
+    function updateZip() {
+    const region = document.getElementById('co-region').value;
+    const province = document.getElementById('co-province').value;
+    const city = document.getElementById('co-city').value;
+    const zipInput = document.getElementById('co-zip');
+
+    if (phLocationData[region]?.[province]?.[city]) {
+        zipInput.value = phLocationData[region][province][city];
+        // Lock the field so users cannot edit it
+        zipInput.readOnly = true; 
     }
 }
 
@@ -455,11 +502,21 @@ function isStepValid(step) {
         const fname = document.getElementById('co-fname')?.value.trim();
         const lname = document.getElementById('co-lname')?.value.trim();
         const phone = document.getElementById('co-phone')?.value.trim();
+        const email = document.getElementById('co-email')?.value.trim();
 
-        if (!fname || !lname || !phone) {
+        // 1. Check for empty fields
+        if (!fname || !lname || !phone || !email) {
             showToast('Missing Info', 'Please fill out all fields in Step 1.');
             return false;
         }
+        
+        // 2. Email Validation (@ check)
+        if (!emailPattern.test(email)) {
+            showToast('Invalid Email', 'Please enter a valid email address containing "@".');
+            return false;
+        }
+
+        // 3. Name Validation
         if (!lettersOnly.test(fname) || !lettersOnly.test(lname)) {
             showToast('Invalid Name', 'Names should not contain numbers.');
             return false;
@@ -469,17 +526,13 @@ function isStepValid(step) {
 
     if (step === 2) {
         const region = document.getElementById('co-region')?.value;
-        const prov = document.getElementById('co-province')?.value.trim();
+        const prov = document.getElementById('co-province')?.value;
         const city = document.getElementById('co-city')?.value;
         const addr = document.getElementById('co-address')?.value.trim();
         const zip = document.getElementById('co-zip')?.value.trim();
 
         if (!region || !prov || !city || !addr || !zip) {
             showToast('Missing Info', 'Please complete your shipping address.');
-            return false;
-        }
-        if (!numbersOnly.test(zip)) {
-            showToast('Invalid Zip', 'Zip code should only contain numbers.');
             return false;
         }
         return true;
