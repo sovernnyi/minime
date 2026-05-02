@@ -461,7 +461,7 @@ function isStepValid(step) {
       return false;
     }
     if (!numbersOnly.test(phone)) {
-      showToast('Invalid Phone', 'Phone number should only contain numbers.');
+      showToast('Invalid Phone', 'Phone number should only contain letters.');
       return false;
     }
   }
