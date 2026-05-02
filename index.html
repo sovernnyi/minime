@@ -906,61 +906,67 @@
       <!-- Step 2: Shipping Details -->
       <div id="checkout-step-2" class="checkout-step-panel hidden">
         <h2 class="checkout-title font-serif">Shipping Address</h2>
-       
-          <div class="checkout-form-grid">
-
-            <div class="form-group">
-      <label class="form-label">Region</label>
-      <select id="co-region" class="form-input" onchange="updateCities()">
-        <option value="" disabled selected>Select Region</option>
-        <option value="NCR">NCR</option>
-        <option value="Region III">Region III</option>
-        <option value="Region IV-A">Region IV-A (CALABARZON)</option>
-        <option value="Region V">Region V</option>
-      </select>
-    </div>
-         
-          <div class="form-group">
-      <label class="form-label">Province</label>
-      <input type="text" id="co-province" class="form-input" placeholder="Province" required />
-    </div>
-
+      
+        <div class="checkout-form-grid">
           
+          <!-- Region Selection -->
           <div class="form-group">
-      <label class="form-label">City / Municipality</label>
-      <select id="co-city" class="form-input" required>
-        <option value="" disabled selected>Select City</option>
-      </select>
-    </div>
+            <label class="form-label">Region</label>
+            <select id="co-region" class="form-input" onchange="updateCities()">
+              <option value="" disabled selected>Select Region</option>
+              <option value="NCR">NCR</option>
+              <option value="Region III">Region III</option>
+              <option value="Region IV-A">Region IV-A (CALABARZON)</option>
+              <option value="Region V">Region V</option>
+            </select>
+          </div>
 
+          <!-- Province Input -->
           <div class="form-group">
-      <label class="form-label">ZIP Code</label>
-      <input type="text" id="co-zip" class="form-input" placeholder="1234" required />
-    </div>
+            <label class="form-label">Province</label>
+            <input type="text" id="co-province" class="form-input" placeholder="Province" required />
+          </div>
 
-          <div class="form-group" style="grid-column:1/-1">
-      <label class="form-label">Street Address</label>
-      <input type="text" id="co-address" class="form-input" placeholder="House No., Street, Barangay" required />
-    </div>
-          
-          <div class="form-group" style="grid-column:1/-1">
-      <label class="form-label">Order Notes (optional)</label>
-      <textarea id="co-notes" class="form-textarea" style="min-height:80px"
-          placeholder="Special instructions, color preferences, size notes…"></textarea>
-    </div>
-  </div>
-        
+          <!-- City Selection (Populated via updateCities JS function) -->
+          <div class="form-group">
+            <label class="form-label">City / Municipality</label>
+            <select id="co-city" class="form-input" required>
+              <option value="" disabled selected>Select City</option>
+            </select>
+          </div>
+
+          <!-- ZIP Code Input -->
+          <div class="form-group">
+            <label class="form-label">ZIP Code</label>
+            <input type="text" id="co-zip" class="form-input" placeholder="1234" required />
+          </div>
+
+          <!-- Street Address (Spans both columns of the grid) -->
+          <div class="form-group" style="grid-column: 1 / -1">
+            <label class="form-label">Street Address</label>
+            <input type="text" id="co-address" class="form-input" placeholder="House No., Street, Barangay" required />
+          </div>
+
+          <!-- Order Notes (Spans both columns of the grid) -->
+          <div class="form-group" style="grid-column: 1 / -1">
+            <label class="form-label">Order Notes (optional)</label>
+            <textarea id="co-notes" class="form-textarea" style="min-height:80px"
+              placeholder="Special instructions, color preferences, size notes…"></textarea>
+          </div>
+        </div> <!-- End of checkout-form-grid -->
+
+        <!-- Navigation Buttons -->
         <div class="checkout-btn-row">
-    <button class="checkout-back-btn" onclick="checkoutStep(1)">← Back</button>
-    <button class="checkout-next-btn" onclick="checkoutStep(3)">
-      Review Order
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-           fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </button>
-  </div>
-</div>
+          <button class="checkout-back-btn" onclick="checkoutStep(1)">← Back</button>
+          <button class="checkout-next-btn" onclick="checkoutStep(3)">
+            Review Order
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
 
       <!-- Step 3: Order Review & Confirm -->
       <div id="checkout-step-3" class="checkout-step-panel hidden">
