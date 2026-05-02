@@ -448,81 +448,79 @@ function buildOrderReview() {
 
 // STEP VALIDATION
 function isStepValid(step) {
-  const lettersOnly = /^[A-Za-z\s]+$/;
-  const numbersOnly = /^[0-9]+$/;
+    const lettersOnly = /^[A-Za-z\s]+$/;
+    const numbersOnly = /^[0-9,+]+$/;
 
-  function isStepValid(step) {
-  const lettersOnly = /^[A-Za-z\s]+$/;
-  const numbersOnly = /^[0-9,+]+$/;
+    if (step === 1) {
+        const fname = document.getElementById('co-fname')?.value.trim();
+        const lname = document.getElementById('co-lname')?.value.trim();
+        const phone = document.getElementById('co-phone')?.value.trim();
 
-  if (step === 1) {
-    const fname = document.getElementById('co-fname')?.value.trim();
-    const lname = document.getElementById('co-lname')?.value.trim();
-    const phone = document.getElementById('co-phone')?.value.trim();
-
-    if (!fname || !lname || !phone) {
-      showToast('Missing Info', 'Please fill out all fields.');
-      return false;
+        if (!fname || !lname || !phone) {
+            showToast('Missing Info', 'Please fill out all fields in Step 1.');
+            return false;
+        }
+        if (!lettersOnly.test(fname) || !lettersOnly.test(lname)) {
+            showToast('Invalid Name', 'Names should not contain numbers.');
+            return false;
+        }
+        return true;
     }
-    if (!lettersOnly.test(fname) || !lettersOnly.test(lname)) {
-      showToast('Invalid Name', 'Names should not contain numbers.');
-      return false;
+
+    if (step === 2) {
+        const region = document.getElementById('co-region')?.value;
+        const city = document.getElementById('co-city')?.value;
+        const prov = document.getElementById('co-province')?.value.trim();
+        const addr = document.getElementById('co-address')?.value.trim();
+        const zip = document.getElementById('co-zip')?.value.trim();
+
+        if (!region || !city || !prov || !addr || !zip) {
+            showToast('Missing Info', 'Please complete your shipping address.');
+            return false;
+        }
+        if (!numbersOnly.test(zip)) {
+            showToast('Invalid Zip', 'Zip code should only contain numbers.');
+            return false;
+        }
+        return true;
     }
     return true;
-  }
-  if (step === 2) {
-    const city = document.getElementById('co-city')?.value;
-    const region = document.getElementById('co-region')?.value;
-    const addr = document.getElementById('co-address')?.value.trim();
-    const zip = document.getElementById('co-zip')?.value.trim();
-
-    if (!city || !region || !addr || !zip) {
-      showToast('Missing Info', 'Please complete your shipping address.');
-      return false;
-    }
-    if (!numbersOnly.test(zip)) {
-      showToast('Invalid Zip', 'Zip code should only contain numbers.');
-      return false;
-    }
-    return true;
-  }
-  return true;
 }
 
 function confirmOrder() {
-  const fname = document.getElementById('co-fname')?.value.trim();
-  const lname = document.getElementById('co-lname')?.value.trim();
-  const email = document.getElementById('co-email')?.value.trim();
-  const phone = document.getElementById('co-phone')?.value.trim();
-  const address = document.getElementById('co-address')?.value.trim();
-  const city = document.getElementById('co-city')?.value.trim();
-  const region = document.getElementById('co-region')?.value.trim(); // Changed from prov
-  const zip = document.getElementById('co-zip')?.value.trim();
-  const notes = document.getElementById('co-notes')?.value.trim() || 'None';
-  const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
+    const fname = document.getElementById('co-fname')?.value.trim();
+    const lname = document.getElementById('co-lname')?.value.trim();
+    const email = document.getElementById('co-email')?.value.trim();
+    const phone = document.getElementById('co-phone')?.value.trim();
+    const address = document.getElementById('co-address')?.value.trim();
+    const city = document.getElementById('co-city')?.value.trim();
+    const region = document.getElementById('co-region')?.value.trim(); 
+    const zip = document.getElementById('co-zip')?.value.trim();
+    const notes = document.getElementById('co-notes')?.value.trim() || 'None';
+    const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
 
-  if (!isStepValid(1) || !isStepValid(2)) return;
+    if (!isStepValid(1) || !isStepValid(2)) return;
 
-  const orderNum = 'MM-' + Date.now().toString().slice(-6);
-  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const discount = Math.round(subtotal * activeDiscount);
-  const discounted = subtotal - discount;
-  const shipping = discounted >= 2500 ? 0 : 150;
-  const total = discounted + shipping;
+    const orderNum = 'MM-' + Date.now().toString().slice(-6);
+    const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const discount = Math.round(subtotal * activeDiscount);
+    const discounted = subtotal - discount;
+    const shipping = discounted >= 2500 ? 0 : 150;
+    const total = discounted + shipping;
 
-  const trackEl = document.getElementById('order-tracking-info');
-  if (trackEl) {
-    trackEl.innerHTML = `
-      <strong>Order Reference</strong><br/>
-      Order #${orderNum}<br/>
-      ${fname} ${lname} • ${email} • ${phone}<br/>
-      ${address}, ${city}, ${region} ${zip}<br/>
-      Payment: ${payment.toUpperCase()} • Total: ₱${total.toLocaleString()}
-    `;
-  }
+    const trackEl = document.getElementById('order-tracking-info');
+    if (trackEl) {
+        trackEl.innerHTML = `
+            <strong>Order Reference</strong><br/>
+            Order #${orderNum}<br/>
+            ${fname} ${lname} • ${email} • ${phone}<br/>
+            ${address}, ${city}, ${region} ${zip}<br/>
+            Payment: ${payment.toUpperCase()} • Total: ₱${total.toLocaleString()}
+        `;
+    }
 
-  const itemList = cart.map(i => `  - ${i.title} × ${i.qty} = ₱${(i.price * i.qty).toLocaleString()}`).join('\n');
-  const emailBody = encodeURIComponent(
+    const itemList = cart.map(i => `  - ${i.title} × ${i.qty} = ₱${(i.price * i.qty).toLocaleString()}`).join('\n');
+    const emailBody = encodeURIComponent(
 `🎉 NEW ORDER #${orderNum}
 
 CUSTOMER:
@@ -546,15 +544,15 @@ PAYMENT METHOD: ${payment.toUpperCase()}
 NOTES: ${notes}
 
 Sent via MiniMe Boutique website.`
-  );
+    );
 
-  window.open(`mailto:deargabclothing@gmail.com?subject=${encodeURIComponent('New Order #' + orderNum)}&body=${emailBody}`, '_blank');
+    window.open(`mailto:deargabclothing@gmail.com?subject=${encodeURIComponent('New Order #' + orderNum)}&body=${emailBody}`, '_blank');
 
-  cart = [];
-  activeDiscount = 0;
-  saveCart();
-  checkoutStep('success');
-  showToast('Order placed! 🎉', 'Check your email for confirmation.');
+    cart = [];
+    activeDiscount = 0;
+    saveCart();
+    checkoutStep('success');
+    showToast('Order placed! 🎉', 'Check your email for confirmation.');
 }
 
 // ─── PAGE NAVIGATION (SPA) 
