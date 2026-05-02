@@ -187,15 +187,15 @@ const phLocationData = {
         "Batangas": { "Batangas City": "4200", "Lipa": "4217", "Tanauan": "4232" },
         "Quezon": { "Lucena": "4301", "Tayabas": "4327", "Sariaya": "4322", "Candelaria": "4317" }
     },
+    "Region III (Central Luzon)": {
+        "Bulacan": { "Malolos": "3000", "Meycauayan": "3020", "San Jose del Monte": "3023" },
+        "Pampanga": { "Angeles": "2009", "San Fernando": "2000", "Mabalacat": "2010" },
+        "Tarlac": { "Tarlac City": "2300" }
+    },
     "Region I (Ilocos Region)": {
         "Ilocos Norte": { "Laoag": "2900", "Batac": "2906" },
         "Ilocos Sur": { "Vigan": "2700", "Candon": "2710" },
         "Pangasinan": { "Dagupan": "2400", "Urdaneta": "2428", "San Carlos": "2420" }
-    },
-    "Region VI (Western Visayas)": {
-        "Iloilo": { "Iloilo City": "5000", "Passi": "5037" },
-        "Negros Occidental": { "Bacolod": "6100", "Talisay": "6115", "Silay": "6116" },
-        "Capiz": { "Roxas City": "5800" }
     }
 };
 
@@ -555,6 +555,7 @@ function isStepValid(step) {
 }
 
 function confirmOrder() {
+    // Gather Data
     const fname = document.getElementById('co-fname')?.value.trim();
     const lname = document.getElementById('co-lname')?.value.trim();
     const email = document.getElementById('co-email')?.value.trim();
@@ -568,6 +569,7 @@ function confirmOrder() {
 
     if (!isStepValid(1) || !isStepValid(2)) return;
 
+    // Generate Order Info
     const orderNum = 'MM-' + Date.now().toString().slice(-6);
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
     const discount = Math.round(subtotal * activeDiscount);
@@ -575,6 +577,7 @@ function confirmOrder() {
     const shipping = discounted >= 2500 ? 0 : 150;
     const total = discounted + shipping;
 
+    // 4. Update the Success Tracking Info UI
     const trackEl = document.getElementById('order-tracking-info');
     if (trackEl) {
         trackEl.innerHTML = `
@@ -586,47 +589,26 @@ function confirmOrder() {
         `;
     }
 
+    // Prepare and Open Email
     const itemList = cart.map(i => `  - ${i.title} × ${i.qty} = ₱${(i.price * i.qty).toLocaleString()}`).join('\n');
-    const emailBody = encodeURIComponent(
-`🎉 NEW ORDER #${orderNum}
+    const emailBody = encodeURIComponent(`NEW ORDER #${orderNum}\n\nCustomer: ${fname} ${lname}\nItems:\n${itemList}\n\nTotal: ₱${total.toLocaleString()}`);
 
-CUSTOMER:
-  Name:     ${fname} ${lname}
-  Email:    ${email}
-  Phone:    ${phone}
-
-SHIPPING ADDRESS:
-  ${address}
-  ${city}, ${region} ${zip}
-
-ITEMS:
-${itemList}
-
-  Discount:  -₱${discount.toLocaleString()}
-  Shipping:  ${shipping === 0 ? 'FREE' : '₱' + shipping}
-  TOTAL:     ₱${total.toLocaleString()}
-
-PAYMENT METHOD: ${payment.toUpperCase()}
-
-NOTES: ${notes}
-
-Sent via MiniMe Boutique website.`
-    );
-
-    window.open(`mailto:deargabclothing@gmail.com?subject=${encodeURIComponent('New Order #' + orderNum)}&body=${emailBody}`, '_blank');
-
+    setTimeout(() => {
+        window.open(`mailto:deargabclothing@gmail.com?subject=${encodeURIComponent('New Order #' + orderNum)}&body=${emailBody}`, '_blank');
+    }, 500);    
+`    
+    // 6. CLEAR CART & RESET UI
     cart = [];
     activeDiscount = 0;
-    saveCart();
+    saveCart();       
+    renderCart();    
 
     // Show the success panel
     document.getElementById('checkout-step-3').classList.add('hidden');
     document.getElementById('checkout-step-success').classList.remove('hidden');
 
-    // Scroll to top of modal so user sees the "Order Confirmed" message
     const box = document.querySelector('.checkout-box');
     if (box) box.scrollTo({ top: 0, behavior: 'smooth' });
-
     showToast('Order placed! 🎉', 'Check your email for confirmation.');
 }
 
