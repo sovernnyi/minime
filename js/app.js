@@ -350,6 +350,12 @@ function closeCheckoutModal() {
 }
 
 function checkoutStep(step) {
+
+  // If user is on Step 1 and clicks "Continue", validate Step 1 fields
+  if (step === 2 && !isStepValid(1)) return; 
+  // If user is on Step 2 and clicks "Continue", validate Step 2 fields
+  if (step === 3 && !isStepValid(2)) return;
+  
   // Hide all panels
   document.querySelectorAll('.checkout-step-panel').forEach(p => p.classList.add('hidden'));
   // Show target panel
@@ -409,6 +415,45 @@ function buildOrderReview() {
   }
 }
 
+// NEW FUNCTION
+function isStepValid(step) {
+  const lettersOnly = /^[A-Za-z\s]+$/;
+  const numbersOnly = /^[0-9]+$/;
+
+  if (step === 1) {
+    const fname = document.getElementById('co-fname')?.value.trim();
+    const lname = document.getElementById('co-lname')?.value.trim();
+    const phone = document.getElementById('co-phone')?.value.trim();
+
+    if (!lettersOnly.test(fname) || !lettersOnly.test(lname)) {
+      showToast('Invalid Name', 'Names should not contain numbers.');
+      return false;
+    }
+    if (!numbersOnly.test(phone)) {
+      showToast('Invalid Phone', 'Phone number should only contain letters.');
+      return false;
+    }
+  }
+
+  if (step === 2) {
+    const city = document.getElementById('co-city')?.value.trim();
+    const prov = document.getElementById('co-province')?.value.trim();
+    const zip = document.getElementById('co-zip')?.value.trim();
+
+    if (!lettersOnly.test(city) || !lettersOnly.test(prov)) {
+      showToast('Invalid Format', 'City and Province should not contain numbers.');
+      return false;
+    }
+    if (!numbersOnly.test(zip)) {
+      showToast('Invalid Zip', 'Zip code should only contain numbers.');
+      return false;
+    }
+  }
+  return true;
+}
+
+
+
 function confirmOrder() {
   // Gather all fields
   const fname   = document.getElementById('co-fname')?.value.trim();
@@ -422,27 +467,11 @@ function confirmOrder() {
   const notes   = document.getElementById('co-notes')?.value.trim() || 'None';
   const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
 
+  // NEW FUNCTION
+  if (!isStepValid(1) || !isStepValid(2)) return;
+
   if (!fname || !lname || !email || !phone || !address || !city || !prov || !zip) {
     showToast('Missing info', 'Please complete all required fields.');
-    return;
-  }
-
-  // ALL VALIDATION
-  
-  // For letters only (includes spaces for names/cities)
-  const lettersOnly = /^[A-Za-z\s]+$/;
-  // For numbers only
-  const numbersOnly = /^[0-9]+$/;
-
-  // Validate Names, City, and Province (No numbers allowed)
-  if (!lettersOnly.test(fname) || !lettersOnly.test(lname) || !lettersOnly.test(city) || !lettersOnly.test(prov)) {
-    showToast('Invalid Format', 'Names, City, and Province should not contain numbers.');
-    return;
-  }
-
-  // Validate Phone and Zip (No letters allowed)
-  if (!numbersOnly.test(phone) || !numbersOnly.test(zip)) {
-    showToast('Invalid Format', 'Phone and Zip code should only contain numbers.');
     return;
   }
 
