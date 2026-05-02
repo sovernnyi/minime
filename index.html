@@ -999,20 +999,29 @@
 
       <!-- Step 4: Success -->
       <div id="checkout-step-success" class="checkout-step-panel hidden checkout-success">
-        <div class="success-icon">🎉</div>
-        <h2 class="checkout-title font-serif">Order Confirmed!</h2>
-        <p class="success-body">Thank you! Your order has been placed. We'll send a confirmation to your email.</p>
-        <div id="order-tracking-info" class="order-tracking-info"></div>
-        <p class="success-note font-serif">
-          We'll contact you within 24 hours with your tracking details.<br/>
-          Follow us on Instagram <strong>@minime_cg</strong> for updates!
-        </p>
-        <button class="checkout-next-btn" onclick="closeCheckoutModal(); showPage('home')">
-          Continue Shopping
-        </button>
-      </div>
+    <div class="success-icon">🎉</div>
+    <h2 class="checkout-title font-serif">Order Confirmed!</h2>
+    <p class="success-body">Thank you! Your order has been placed. We'll send a confirmation to your email.</p>
+    
+    <!-- Block -->
+    <div id="order-tracking-info" class="order-summary-display">
+        <div class="summary-details">
+            <p><strong>Order Number:</strong> <span id="res-order-num"></span></p>
+            <p><strong>Items:</strong> <span id="res-items"></span></p>
+            <p><strong>Total Amount:</strong> <span id="res-total"></span></p>
+            <p><strong>Payment:</strong> <span id="res-payment"></span></p>
+        </div>
     </div>
-  </div>
+
+    <p class="success-note font-serif">
+        We'll contact you within 24 hours with your tracking details.<br/>
+        Follow us on Instagram <strong>@minime_cg</strong> for updates!
+    </p>
+    
+    <button class="checkout-next-btn" onclick="closeCheckoutModal(); showPage('home')">
+        Continue Shopping
+    </button>
+</div>
 
   <!-- TOAST -->
   <div id="toast" class="toast" role="alert" aria-live="assertive">
