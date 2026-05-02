@@ -176,67 +176,40 @@ const PRODUCTS = {
 const phLocationData = {
     "NCR": {
         "Metro Manila": {
-            "Manila": "1000",
-            "Makati": "1200",
-            "Quezon City": "1100",
-            "Pasig": "1600",
-            "Taguig": "1630",
-            "Mandaluyong": "1550",
-            "Marikina": "1800",
-            "Las Piñas": "1740"
+            "Manila": "1000", "Makati": "1200", "Quezon City": "1100", "Pasig": "1600",
+            "Taguig": "1630", "Mandaluyong": "1550", "Marikina": "1800", "Las Piñas": "1740"
         }
     },
     "Region IV-A (CALABARZON)": {
         "Rizal": {
-            "Antipolo": "1870",
-            "Taytay": "1920",
-            "Cainta": "1900",
-            "Angono": "1930",
-            "Binangonan": "1940",
-            "San Mateo": "1850",
-            "Rodriguez": "1860"
+            "Antipolo": "1870", "Taytay": "1920", "Cainta": "1900", "Angono": "1930",
+            "Binangonan": "1940", "San Mateo": "1850", "Rodriguez": "1860"
         },
         "Cavite": {
-            "Bacoor": "4102",
-            "Dasmariñas": "4114",
-            "Imus": "4103",
-            "Tagaytay": "4120",
-            "Silang": "4118",
-            "General Trias": "4107",
-            "Tanza": "4108"
+            "Bacoor": "4102", "Dasmariñas": "4114", "Imus": "4103", "Tagaytay": "4120",
+            "Silang": "4118", "General Trias": "4107", "Tanza": "4108"
         },
         "Laguna": {
-            "Calamba": "4027",
-            "Santa Rosa": "4026",
-            "Biñan": "4024",
-            "San Pablo": "4000",
-            "Cabuyao": "4025"
+            "Calamba": "4027", "Santa Rosa": "4026", "Biñan": "4024", "San Pablo": "4000", "Cabuyao": "4025"
         },
         "Batangas": {
-            "Batangas City": "4200",
-            "Lipa": "4217",
-            "Tanauan": "4232",
-            "Nasugbu": "4231"
+            "Batangas City": "4200", "Lipa": "4217", "Tanauan": "4232", "Nasugbu": "4231"
         }
     },
     "Region III (Central Luzon)": {
         "Bulacan": {
-            "Malolos": "3000",
-            "Meycauayan": "3020",
-            "San Jose del Monte": "3023",
-            "Baliuag": "3006"
+            "Malolos": "3000", "Meycauayan": "3020", "San Jose del Monte": "3023", "Baliuag": "3006"
         },
         "Pampanga": {
-            "San Fernando": "2000",
-            "Angeles": "2009",
-            "Mabalacat": "2010"
+            "San Fernando": "2000", "Angeles": "2009", "Mabalacat": "2010"
         }
     }
 };
 
 // UPDATE PROVINCE
 function updateProvinces() {
-    const region = document.getElementById('co-region').value;
+    const regionSelect = document.getElementById('co-region');
+    const region = regionSelect.value;
     const provSelect = document.getElementById('co-province');
     const citySelect = document.getElementById('co-city');
     const zipInput = document.getElementById('co-zip');
@@ -244,7 +217,6 @@ function updateProvinces() {
     provSelect.innerHTML = '<option value="" disabled selected>Select Province</option>';
     citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
     zipInput.value = '';
-    zipInput.readOnly = true;
 
     if (phLocationData[region]) {
         Object.keys(phLocationData[region]).forEach(prov => {
@@ -253,9 +225,10 @@ function updateProvinces() {
             opt.textContent = prov;
             provSelect.appendChild(opt);
         });
+    } else {
+        console.error("Region not found in data:", region);
     }
 }
-
     // UPDATE CITIES
     function updateCities() {
     const region = document.getElementById('co-region').value;
