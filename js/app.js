@@ -497,6 +497,7 @@ function buildOrderReview() {
 function isStepValid(step) {
     const lettersOnly = /^[A-Za-z\s]+$/;
     const numbersOnly = /^[0-9,+]+$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (step === 1) {
         const fname = document.getElementById('co-fname')?.value.trim();
