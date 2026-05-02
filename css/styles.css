@@ -1668,31 +1668,21 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
     text-align: center;
 }
 
-/* Icon */
-.success-icon {
-    font-size: 64px;
-    margin-bottom: 16px;
-    display: block;
-}
+/* Centering the icon and details box */
+.success-icon { font-size: 64px; margin-bottom: 16px; display: block; }
 
 .order-summary-display {
     background: #fdf8f5;
     border-radius: 20px;
     padding: 25px;
-    margin: 20px 0;
+    margin: 20px auto;
     width: 100%;
     max-width: 450px;
-    text-align: left; /* Keep text readable while box is centered */
+    text-align: left; 
     border: 1px solid var(--border);
 }
 
-.summary-details p {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    margin: 8px 0;
-    color: var(--text-dark);
-}
-
+/* Center */
 .checkout-success .checkout-next-btn {
     margin: 20px auto 0 auto !important;
     display: inline-flex !important;
