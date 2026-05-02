@@ -554,20 +554,20 @@ function isStepValid(step) {
 function confirmOrder() {
     if (!isStepValid(1) || !isStepValid(2)) return;
 
-    // 1. Calculate Data (Capture before clearing cart)
+    // 1. DATA
     const orderNum = 'MM-' + Date.now().toString().slice(-6);
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
     const total = subtotal + (subtotal >= 2500 ? 0 : 150);
     const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
     const itemsSummary = cart.map(i => `${i.title} (x${i.qty})`).join(', ');
 
-    // 2. Fill the HTML Data placeholders using the IDs we added to index.html
+    // 2. Fill 
     document.getElementById('res-order-num').textContent = `#${orderNum}`;
     document.getElementById('res-items').textContent = itemsSummary;
     document.getElementById('res-total').textContent = `₱${total.toLocaleString()}`;
     document.getElementById('res-payment').textContent = payment.toUpperCase();
 
-    // 3. UI Transition
+    // 3. Transition
     const stepHeader = document.getElementById('checkout-steps');
     if (stepHeader) stepHeader.style.display = 'none'; // Hides 1-2-3 circles
 
