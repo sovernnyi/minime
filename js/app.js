@@ -218,8 +218,6 @@ function updateProvinces() {
             opt.textContent = prov;
             provSelect.appendChild(opt);
         });
-    } else {
-        console.error("Region not found in data:", region);
     }
 }
     // UPDATE CITIES
@@ -250,7 +248,6 @@ function updateProvinces() {
 
     if (phLocationData[region]?.[province]?.[city]) {
         zipInput.value = phLocationData[region][province][city];
-        // Lock the field so users cannot edit it
         zipInput.readOnly = true; 
         zipInput.style.backgroundColor = "#f9f9f9"; 
     }
@@ -555,6 +552,8 @@ function isStepValid(step) {
 }
 
 function confirmOrder() {
+
+    if (!isStepValid(1) || !isStepValid(2)) return;
     // Gather Data
     const fname = document.getElementById('co-fname')?.value.trim();
     const lname = document.getElementById('co-lname')?.value.trim();
@@ -581,17 +580,19 @@ function confirmOrder() {
     const trackEl = document.getElementById('order-tracking-info');
     if (trackEl) {
         trackEl.innerHTML = `
-            <strong>Order Reference</strong><br/>
-            Order #${orderNum}<br/>
-            ${fname} ${lname} • ${email} • ${phone}<br/>
-            ${address}, ${city}, ${region} ${zip}<br/>
-            Payment: ${payment.toUpperCase()} • Total: ₱${total.toLocaleString()}
+            <div style="text-align:left; margin-top:15px; padding:15px; background:#fdf8f5; border-radius:8px; font-size:12px; line-height:1.6;">
+                <strong>Order Reference: #${orderNum}</strong><br/>
+                <strong>Customer:</strong> ${fname} ${lname}<br/>
+                <strong>Shipping:</strong> ${address}, ${city}, ${region} ${zip}<br/>
+                <strong>Payment Method:</strong> ${payment.toUpperCase()}<br/>
+                <strong>Total Amount:</strong> ₱${total.toLocaleString()}
+            </div>
         `;
     }
 
     // Prepare and Open Email
-    const itemList = cart.map(i => `  - ${i.title} × ${i.qty} = ₱${(i.price * i.qty).toLocaleString()}`).join('\n');
-    const emailBody = encodeURIComponent(`NEW ORDER #${orderNum}\n\nCustomer: ${fname} ${lname}\nItems:\n${itemList}\n\nTotal: ₱${total.toLocaleString()}`);
+    const itemList = cart.map(i => `${i.title} x${i.qty}`).join(', ');
+    const emailBody = encodeURIComponent(`Order #${orderNum}\nItems: ${itemList}\nTotal: ₱${total.toLocaleString()}`);
 
     setTimeout(() => {
         window.open(`mailto:deargabclothing@gmail.com?subject=${encodeURIComponent('New Order #' + orderNum)}&body=${emailBody}`, '_blank');
@@ -607,10 +608,12 @@ function confirmOrder() {
     document.getElementById('checkout-step-3').classList.add('hidden');
     document.getElementById('checkout-step-success').classList.remove('hidden');
 
-    const box = document.querySelector('.checkout-box');
-    if (box) box.scrollTo({ top: 0, behavior: 'smooth' });
-    showToast('Order placed! 🎉', 'Check your email for confirmation.');
-}
+    cart = [];
+    activeDiscount = 0;
+    saveCart();       
+    updateCartBadges();
+    
+    showToast('Order placed! 🎉', 'Thank you for shopping.');
 
 // ─── PAGE NAVIGATION (SPA) 
 function showPage(pageName, scrollTo) {
