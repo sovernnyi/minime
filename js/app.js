@@ -172,6 +172,37 @@ const PRODUCTS = {
   }
 };
 
+// LOCATION DATA
+const phLocationData = {
+    "NCR": ["Manila", "Quezon City", "Makati", "Taguig", "Pasig", "Caloocan"],
+    "Region III": ["Angeles City", "San Fernando", "Malolos", "Tarlac City", "Olongapo"],
+    "Region IV-A": ["Antipolo", "Bacoor", "Calamba", "Dasmariñas", "Lucena", "Taytay", "Cainta"],
+    "Region V": ["Legazpi", "Naga", "Iriga", "Tabaco", "Sorsogon City"]
+};
+
+// Function to update the City dropdown
+function updateCities() {
+    const regionDropdown = document.getElementById('co-region');
+    const cityDropdown = document.getElementById('co-city');
+    if (!regionDropdown || !cityDropdown) return;
+
+    const selectedRegion = regionDropdown.value;
+
+    // Clear current cities
+    cityDropdown.innerHTML = '<option value="" disabled selected>Select City</option>';
+
+    // Populate with new cities
+    if (phLocationData[selectedRegion]) {
+        phLocationData[selectedRegion].forEach(city => {
+            const option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            cityDropdown.appendChild(option);
+        });
+    }
+}
+
+
 // ─── PRODUCT MODAL 
 let currentProduct = null;
 let modalQty = 1;
