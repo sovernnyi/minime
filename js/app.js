@@ -1,4 +1,4 @@
-/* MiniMe Boutique — app.js (fixed) */
+/* MiniMe Boutique — app.js */
 
 // ─── CART STATE
 let cart;
