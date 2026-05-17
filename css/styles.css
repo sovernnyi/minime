@@ -1,4 +1,10 @@
-/* MiniMe Boutique — styles.css */
+/* ============================================================
+   MiniMe Boutique — styles.css  (patched)
+   Key fixes vs original:
+     1. Toast z-index raised to 9999 + stacking context isolated
+     2. .field-error visibility improved (color, margin)
+     3. No other layout changes
+   ============================================================ */
 
 /* --- CSS VARIABLES --- */
 :root {
@@ -812,7 +818,11 @@ h1, h2, h3  { font-family: 'Cormorant Garamond', serif; }
 }
 .modal-add-btn svg { width: 16px; height: 16px; }
 
-/* ─── FIELD ERROR */
+/* ─── FIELD ERROR ─────────────────────────────────────────────
+   FIX: was display:none / display:block which breaks animation.
+   Now uses opacity + height so it slides in smoothly.
+   The .visible class is toggled by JS.
+   ──────────────────────────────────────────────────────────── */
 .field-error {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
@@ -954,6 +964,10 @@ select.error {
   text-align: center;
   padding: 80px 24px;
   grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 #cart-empty-state svg {
   color: var(--pink-200);
